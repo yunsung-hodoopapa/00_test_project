@@ -1,31 +1,24 @@
-import { Card, Box } from '@mui/material';
 import styled from '@emotion/styled';
 
-type ProductInfoType = {
-  item_no: number;
-  item_name: string;
-  detail_image_url: string;
-  price: number;
-  score: number;
-};
-
-const StyledCard = styled(Card)`
-  display: 'flex';
-  flex-direction: 'column';
-  justify-content: 'start';
-  margin: 'auto';
-  overflow: 'hidden';
-  transition: 'all 250ms ease-in-out';
-  border-radius: '8px';
+const StyledCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  margin: auto;
+  transition: all 250ms ease-in-out;
+  border: 1px solid blue;
+  border-radius: 8px;
 `;
 
-const ProductCard = (props: ProductInfoType) => {
+const ProductCard = (props: any) => {
   // eslint-disable-next-line no-unused-vars
-  const { item_no, item_name, detail_image_url, price, score } = props;
+  const {
+    item: { item_no, item_name, detail_image_url, price, score },
+  } = props;
 
   return (
     <StyledCard>
-      <Box>{item_name}</Box>
+      <span>{item_name}</span>
     </StyledCard>
   );
 };
