@@ -119,7 +119,7 @@ const productItems = [
 
 export const handlers = [
   // 아이템 목록 가져오기
-  rest.get('/productItems', (req, res, ctx) => {
+  rest.get('/products', (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(productItems));
   }),
 ];
