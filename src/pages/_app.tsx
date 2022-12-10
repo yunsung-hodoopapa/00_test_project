@@ -7,6 +7,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import createEmotionCache from 'src/util/createEmotionCache';
 import theme from 'src/styles/theme';
 
+if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+  import ('../mocks');
+}
+
 const clientSideEmotionCache = createEmotionCache();
 
 interface MyAppProps extends AppProps {
