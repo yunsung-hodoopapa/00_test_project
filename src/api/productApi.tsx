@@ -1,9 +1,9 @@
 import { api, HOME_URL } from './api';
 
 class ProductApi {
-  async getProducts() {
+  async getProducts(page) {
     const res = await api.callApi({
-      url: `${HOME_URL}/api/products`,
+      url: `${HOME_URL}/api/products/${page}/${5}`,
       method: 'GET',
     });
     return res.data;

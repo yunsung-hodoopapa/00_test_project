@@ -2,18 +2,23 @@ import { useQuery } from '@tanstack/react-query';
 import { a, b } from 'msw/lib/SetupApi-b2f0e5ac';
 import { productApi } from 'src/api/productApi';
 
-const useProducts = () => {
+const useProducts = (page) => {
   return useQuery(
-    ['products'],
+    ['products', page],
     () => {
-      return productApi.getProducts();
+      return productApi.getProducts(page);
     },
     {
+      keepPreviousData: false,
       select: (data) => {
-        const sortingData = data.sort((a: any, b: any) => {
+        const sortingData = data.contents.sort((a: any, b: any) => {
           return b.score - a.score;
         });
-        return sortingData;
+        const hasMore = data.totalPages > page;
+        return {
+          sortingData,
+          hasMore,
+        };
       },
     },
   );
