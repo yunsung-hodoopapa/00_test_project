@@ -3,7 +3,7 @@ import { productApi } from 'src/api/productApi';
 
 const useProducts = () => {
   return useQuery(['products'], () => {
-    productApi.getProducts();
+    return productApi.getProducts();
   });
 };
 
