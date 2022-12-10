@@ -119,7 +119,8 @@ const productItems = [
 
 export const handlers = [
   // 아이템 목록 가져오기
-  rest.get('/products', (req, res, ctx) => {
+  rest.get('http://backend.dev/api/products', (req, res, ctx) => {
+    console.log('mocking');
     return res(ctx.status(200), ctx.json(productItems));
   }),
 ];
