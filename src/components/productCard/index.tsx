@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import Image from 'next/image';
 import Button from 'src/components/common/Button';
 import { useCartStore } from 'src/store/useCartStore';
-import { useEffect } from 'react';
+import Router from 'next/router';
 
 const StyledCard = styled.div`
   display: flex;
@@ -17,13 +17,14 @@ const StyledCard = styled.div`
   border-radius: 8px;
 `;
 
-const ProductDescriptionWrap = styled.div`
+const QuantitySelectorWrap = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 50%;
 `;
 
-const ProductButtonWrap = styled.div`
+const ProductInfomationWrap = styled.div`
   display: flex;
   justify-content: space-between;
 `;
@@ -36,21 +37,27 @@ const ProductCard = (props: any) => {
 
   const { cart, addCartItem, removeCartItem } = useCartStore();
 
-  useEffect(() => {
-    console.log(cart);
-  }, [cart]);
+  // const currentQuauntity = cart.reduce(
+  //   (prev, current) => prev + current.quantity,
+  //   0,
+  // );
+
+  const currentItem = cart.filter(
+    (cartItem) => cartItem.item_no === item_no,
+  )[0];
 
   return (
     <StyledCard>
       <Image src={detail_image_url} width={250} height={250} alt="상품이미지" />
-      <ProductDescriptionWrap>
+      <ProductInfomationWrap>
         <span>{item_name}</span>
         <span>{price}</span>
-      </ProductDescriptionWrap>
-      <ProductButtonWrap>
+      </ProductInfomationWrap>
+      <QuantitySelectorWrap>
         <Button onClick={() => removeCartItem(item_no)}>빼기</Button>
+        <span>{currentItem?.quantity | 0}</span>
         <Button onClick={() => addCartItem(props.item)}>넣기 </Button>
-      </ProductButtonWrap>
+      </QuantitySelectorWrap>
     </StyledCard>
   );
 };

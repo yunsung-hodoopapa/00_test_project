@@ -16,6 +16,7 @@ interface ButtonProps
   children: ReactNode;
   className?: string;
   onClick: () => void;
+  disabled?: boolean;
 }
 
 const CustomButton = styled.button`
