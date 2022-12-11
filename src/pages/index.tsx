@@ -6,14 +6,6 @@ import ProductCard from 'src/components/productCard';
 import { Key } from 'react';
 import { productApi } from 'src/api/productApi';
 import Pagination from 'src/components/pagination';
-// type ProductInfoType = {
-//   item_no: number;
-//   item_name: string;
-//   detail_image_url: string;
-//   price: number;
-//   score: number;
-//   availableCoupon?: boolean;
-// };
 
 const Home: NextPage = () => {
   const [currentPage, setCurrentPage] = useState(0);
