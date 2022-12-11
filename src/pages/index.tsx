@@ -17,11 +17,7 @@ import Pagination from 'src/components/pagination';
 
 const Home: NextPage = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const { data, isLoading } = useProducts(currentPage);
-
-  if (isLoading) {
-    return <div>loading...</div>;
-  }
+  const { data } = useProducts(currentPage);
 
   return (
     <div>
@@ -34,18 +30,18 @@ const Home: NextPage = () => {
   );
 };
 
-// export async function getStaticProps() {
-//   const queryClient = new QueryClient();
+export async function getStaticProps() {
+  const queryClient = new QueryClient();
 
-//   await queryClient.prefetchQuery(['products', 0], () => {
-//     return productApi.getProducts(0);
-//   });
+  await queryClient.prefetchQuery(['products', 0], () => {
+    return productApi.getProducts(0);
+  });
 
-//   return {
-//     props: {
-//       dehydratedState: dehydrate(queryClient),
-//     },
-//   };
-// }
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
 
 export default Home;
