@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { a, b } from 'msw/lib/SetupApi-b2f0e5ac';
 import { productApi } from 'src/api/productApi';
 
-const useProducts = (page) => {
+const useProducts = (page: number) => {
   return useQuery(
     ['products', page],
     () => {
