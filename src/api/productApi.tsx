@@ -6,6 +6,7 @@ class ProductApi {
       url: `${HOME_URL}/api/products/${page}/${5}`,
       method: 'GET',
     });
+    console.log(res);
     return res.data;
   }
 }

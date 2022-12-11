@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import type { NextPage } from 'next';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { productApi } from 'src/api/productApi';
