@@ -56,7 +56,7 @@ const CartItemCard = (props) => {
           <span>
             {item_name} x {quantity}
           </span>
-          <span>{price.toLocaleString('ko-KR')}원</span>
+          <span>{price?.toLocaleString('ko-KR')}원</span>
         </ContentWrapper>
       </FlexBox>
       <CartOptionWrap>

@@ -3,9 +3,15 @@ import CartLayout from 'src/components/layouts/CartLayout';
 import CartItems from 'src/components/cart/CartItems';
 import CartInformation from 'src/components/cart/CartInformation';
 import Modal from 'src/components/modal';
+import { useCoupons } from 'src/hooks/useCoupons';
+import CounponList from 'src/components/cart/coupon/CouponList';
+import { useCartStore } from 'src/store/useCartStore';
 
 const Cart = () => {
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const { data } = useCoupons();
+  const { coupons } = useCartStore();
+  console.log(coupons);
 
   const onClickToggleModal = () => {
     setIsOpenModal(!isOpenModal);
@@ -19,7 +25,7 @@ const Cart = () => {
             onClickToggleModal={onClickToggleModal}
             isOpenModal={isOpenModal}
           >
-            이곳에 쿠폰이 들어갈 예정
+            <CounponList />
           </Modal>
         )}
         <CartItems />

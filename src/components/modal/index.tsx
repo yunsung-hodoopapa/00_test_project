@@ -19,10 +19,11 @@ const DialogBox = styled.dialog`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   top: 50%;
   left: 50%;
   width: 400px;
-  height: 400px;
+  height: 300px;
   transform: translate(-50%, -50%);
   border: none;
   border-radius: 4px;

@@ -1,6 +1,10 @@
 import { useCartStore } from 'src/store/useCartStore';
 import styled from '@emotion/styled';
 
+type CartInformationType = {
+  onClickToggleModal: () => void;
+};
+
 const CartProceedWrap = styled.div`
   padding: 8px 16px;
   margin-left: 16px;
@@ -24,21 +28,24 @@ const DialgButton = styled.button`
   cursor: pointer;
 `;
 
-const CartInformation = ({ onClickToggleModal }) => {
-  const { cart } = useCartStore();
+const CartInformation = ({ onClickToggleModal }: CartInformationType) => {
+  const { cart, adjustedCoupon } = useCartStore();
 
   if (!cart.length) {
     return <div></div>;
   }
+
+  console.log(adjustedCoupon);
 
   const totalNumber = cart.reduce((prev, current) => {
     return prev + current.quantity;
   }, 0);
 
   const totalCost = cart.reduce((prev, current) => {
-    const item = cart.find((f) => {
-      return f.item_no === current.item_no;
+    const item = cart.find((item) => {
+      return item.item_no === current.item_no;
     });
+    console.log(item);
     const itemPrice = item!.price * current.quantity;
     return prev + itemPrice;
   }, 0);
