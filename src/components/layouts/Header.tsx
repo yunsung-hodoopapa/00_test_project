@@ -19,7 +19,13 @@ const Header = () => {
   const router = useRouter();
   return (
     <StyledHeader>
-      <div>29cm 채용과제</div>
+      <div
+        onClick={() => {
+          return router.push('/');
+        }}
+      >
+        29cm 채용과제
+      </div>
       <IconWrapper
         onClick={() => {
           return router.push('/cart');
