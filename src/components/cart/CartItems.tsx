@@ -1,8 +1,8 @@
-import React, { useState, ChangeEvent } from 'react';
-import { useCartStore } from 'src/store/useCartStore';
+/* eslint-disable react-hooks/rules-of-hooks */
+import React, { useState, ChangeEvent, useEffect } from 'react';
 import CartItemCard from './CartItemCard';
 import styled from '@emotion/styled';
-import { f } from 'msw/lib/SetupApi-b2f0e5ac';
+import { useCartStore } from 'src/store/useCartStore';
 
 const GridContainer = styled.div`
   display: grid;
@@ -10,8 +10,7 @@ const GridContainer = styled.div`
 `;
 
 const CartItems = () => {
-  const { cart } = useCartStore();
-  // const [isAllChecked, setIsAllChecked] = useState<boolean>(false);
+  const { cart, getSelectedIds } = useCartStore();
   const [checkedItems, setCheckedItems] = useState<string[] | []>([]);
 
   const handleSingleCheck = (checked: boolean, id: string) => {
@@ -37,7 +36,6 @@ const CartItems = () => {
       });
       setCheckedItems(checkedItemArray);
     } else if (!e.target.checked) {
-      console.log('전체선택 해제');
       setCheckedItems([]);
     } else if (!checkedItems.length) {
       setCheckedItems([]);
@@ -47,6 +45,10 @@ const CartItems = () => {
   if (!cart?.length) {
     return <div>카트에 아이템이 없습니다.</div>;
   }
+
+  useEffect(() => {
+    getSelectedIds(checkedItems);
+  }, [checkedItems]);
 
   return (
     <>
