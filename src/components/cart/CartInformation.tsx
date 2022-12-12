@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useCartStore } from 'src/store/useCartStore';
 import styled from '@emotion/styled';
+import { ProductInfoType, CouponType } from 'src/type/index';
 
 type CartInformationType = {
   onClickToggleModal: () => void;
@@ -17,8 +19,8 @@ const FlexBetweenBox = styled.div`
 `;
 
 const DialgButton = styled.button`
-  width: 160px;
-  height: 48px;
+  width: 130px;
+  height: 38px;
   background-color: blueviolet;
   color: white;
   font-size: 1.2rem;
@@ -29,26 +31,76 @@ const DialgButton = styled.button`
 `;
 
 const CartInformation = ({ onClickToggleModal }: CartInformationType) => {
-  const { cart, adjustedCoupon } = useCartStore();
+  const { cart, selectedIds, adjustedCoupon, eraseCoupons } = useCartStore();
 
   if (!cart.length) {
     return <div></div>;
   }
 
-  console.log(adjustedCoupon);
+  // 선택된 아이템만 결제금액을 계산 하도록 함수 추가
+  const selecteItemInfo = cart
+    .map((item) => {
+      let selectWrap: Array<ProductInfoType> = [];
+      const itemId = item.item_no.toString();
+      selectedIds.map((selectId) => {
+        if (itemId === selectId) {
+          selectWrap.push(item);
+        }
+      });
+      return selectWrap;
+    })
+    .flat();
 
-  const totalNumber = cart.reduce((prev, current) => {
+  const totalNumber = selecteItemInfo.reduce((prev, current) => {
     return prev + current.quantity;
   }, 0);
 
-  const totalCost = cart.reduce((prev, current) => {
-    const item = cart.find((item) => {
-      return item.item_no === current.item_no;
+  const totalCost = selecteItemInfo?.reduce((prev, current) => {
+    const item = selecteItemInfo?.find((item) => {
+      return item?.item_no === current?.item_no;
     });
-    console.log(item);
-    const itemPrice = item!.price * current.quantity;
+    const itemPrice = item?.price * current?.quantity;
     return prev + itemPrice;
   }, 0);
+
+  const getDiscountedPrice = (
+    adjustedCoupon: CouponType,
+    selecteItemInfo: ProductInfoType[],
+  ) => {
+    if (!adjustedCoupon) {
+      return 0;
+    } else {
+      console.log('비율 쿠폰 적용');
+      if (adjustedCoupon.type === 'rate') {
+        const salePriceWrap: Array<number> = [];
+        [...selecteItemInfo].map((selectItem) => {
+          if (selectItem?.hasOwnProperty('availableCoupon')) {
+            return selectItem.price;
+          } else {
+            const salePrice = selectItem.price / adjustedCoupon.discountRate;
+            salePriceWrap.push(salePrice);
+          }
+        });
+        const sumOfSalePrice = salePriceWrap.reduce((sum, currentValue) => {
+          return sum + currentValue;
+        }, 0);
+        return sumOfSalePrice;
+      } else {
+        console.log('정액 쿠폰 적용');
+        if (
+          selecteItemInfo.length === 1 &&
+          selecteItemInfo[0]?.hasOwnProperty('availableCoupon')
+        ) {
+          return 0;
+        } else {
+          return adjustedCoupon.discountAmount;
+        }
+      }
+    }
+  };
+
+  const totalValueOfSale = getDiscountedPrice(adjustedCoupon, selecteItemInfo);
+  console.log(totalValueOfSale);
 
   return (
     <CartProceedWrap>
@@ -58,9 +110,30 @@ const CartInformation = ({ onClickToggleModal }: CartInformationType) => {
       </FlexBetweenBox>
       <FlexBetweenBox>
         <span>총 금액</span>
-        <span>{totalCost.toLocaleString('ko-KR')}원</span>
+        <span>
+          {selecteItemInfo.length
+            ? (totalCost - totalValueOfSale).toLocaleString('ko-KR')
+            : 0}
+          원
+        </span>
       </FlexBetweenBox>
-      <DialgButton onClick={onClickToggleModal}>쿠폰 적용하기 </DialgButton>
+      <FlexBetweenBox>
+        <DialgButton
+          onClick={onClickToggleModal}
+          disabled={!selectedIds.length}
+        >
+          쿠폰 적용하기
+        </DialgButton>
+        <DialgButton
+          onClick={() => {
+            console.log("쿠폰제거");
+            return eraseCoupons();
+          }}
+          disabled={!adjustedCoupon}
+        >
+          쿠폰 제거하기
+        </DialgButton>
+      </FlexBetweenBox>
     </CartProceedWrap>
   );
 };

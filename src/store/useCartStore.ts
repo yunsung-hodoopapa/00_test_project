@@ -6,17 +6,21 @@ import { ProductInfoType, CouponType } from 'src/type/index';
 type CartStateType = {
   cart: ProductInfoType[];
   coupons: CouponType[];
+  selectedIds: string[];
   adjustedCoupon: CouponType | string;
   addCartItem: (item: any) => void;
   removeCartItem: (item_no: number) => void;
   getCoupons: (data: any) => void;
   adjustCoupons: (title: string) => void;
+  getSelectedIds: (selectedIds: string[]) => void;
+  eraseCoupons: () => void;
 };
 
 export const useCartStore = create<CartStateType>((set) => ({
   //initial state
   cart: [],
   coupons: [],
+  selectedIds: [],
   adjustedCoupon: '',
   addCartItem: (item: any) => {
     set((state) => {
@@ -79,8 +83,22 @@ export const useCartStore = create<CartStateType>((set) => ({
       console.log(getAdjustedCoupon);
       return {
         ...state,
-        adjustedCoupon: getAdjustedCoupon,
+        adjustedCoupon: getAdjustedCoupon[0],
       };
     });
+  },
+  eraseCoupons: () => {
+    set((state) => {
+      return {
+        ...state,
+        adjustedCoupon: '',
+      };
+    });
+  },
+  getSelectedIds: (selectedIds) => {
+    set((state) => ({
+      ...state,
+      selectedIds,
+    }));
   },
 }));
