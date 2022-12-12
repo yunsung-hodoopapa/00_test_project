@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import Button from 'src/components/common/Button';
@@ -36,14 +37,29 @@ const CartOptionWrap = styled.div`
 const CartItemCard = (props) => {
   const {
     cartItem: { item_no, item_name, detail_image_url, price, score, quantity },
+    handleSingleCheck,
+    checkedItems,
   } = props;
 
   const { removeCartItem, addCartItem } = useCartStore();
 
+  const itemId = item_no.toString();
+
+  useEffect(() => {
+    console.log(checkedItems);
+  }, [checkedItems]);
+
   return (
     <ItemWrap>
       <FlexBox>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          id={item_no}
+          onChange={(e) => {
+            return handleSingleCheck(e.target.checked, e.target.id);
+          }}
+          checked={checkedItems.includes(itemId) ? true : false}
+        />
         <ImageWrapper>
           <Image
             src={detail_image_url}
