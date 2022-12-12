@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { CouponType } from 'src/type/index';
 import Button from 'src/components/common/Button';
 import { useCartStore } from 'src/store/useCartStore';
+import { useModalStore } from 'src/store/useModalStore';
 
 type PropType = {
   coupon: CouponType;
@@ -42,9 +43,9 @@ const ButtonWrap = styled.div`
 
 const CouponCard = (props: PropType) => {
   const { coupon } = props;
-  const { adjustCoupons, adjustedCoupon } = useCartStore();
+  const { adjustCoupons } = useCartStore();
+  const { onClickToggle } = useModalStore();
 
-  console.log(adjustedCoupon);
   return (
     <CounponContainer>
       <CouponTypeWrap>
@@ -55,7 +56,10 @@ const CouponCard = (props: PropType) => {
       </Counpon>
       <ButtonWrap>
         <Button
-          onClick={() => adjustCoupons(coupon.title)}
+          onClick={() => {
+            adjustCoupons(coupon.title);
+            onClickToggle();
+          }}
         >
           적용하기
         </Button>

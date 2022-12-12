@@ -2,10 +2,7 @@
 import { useCartStore } from 'src/store/useCartStore';
 import styled from '@emotion/styled';
 import { ProductInfoType, CouponType } from 'src/type/index';
-
-type CartInformationType = {
-  onClickToggleModal: () => void;
-};
+import { useModalStore } from 'src/store/useModalStore';
 
 const CartProceedWrap = styled.div`
   padding: 8px 16px;
@@ -30,8 +27,9 @@ const DialgButton = styled.button`
   cursor: pointer;
 `;
 
-const CartInformation = ({ onClickToggleModal }: CartInformationType) => {
+const CartInformation = () => {
   const { cart, selectedIds, adjustedCoupon, eraseCoupons } = useCartStore();
+  const { onClickToggle } = useModalStore();
 
   if (!cart.length) {
     return <div></div>;
@@ -118,15 +116,12 @@ const CartInformation = ({ onClickToggleModal }: CartInformationType) => {
         </span>
       </FlexBetweenBox>
       <FlexBetweenBox>
-        <DialgButton
-          onClick={onClickToggleModal}
-          disabled={!selectedIds.length}
-        >
+        <DialgButton onClick={onClickToggle} disabled={!selectedIds.length}>
           쿠폰 적용하기
         </DialgButton>
         <DialgButton
           onClick={() => {
-            console.log("쿠폰제거");
+            console.log('쿠폰제거');
             return eraseCoupons();
           }}
           disabled={!adjustedCoupon}

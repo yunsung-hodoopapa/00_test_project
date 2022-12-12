@@ -1,10 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
-
-type MpdalDefaultType = {
-  onClickToggleModal: () => void;
-  isOpenModal: boolean;
-};
+import { useModalStore } from 'src/store/useModalStore';
 
 const ModalContainer = styled.div`
   display: flex;
@@ -45,15 +41,13 @@ const Backdrop = styled.div`
   z-index: 999;
 `;
 
-const Modal = ({
-  onClickToggleModal,
-  isOpenModal,
-  children,
-}: PropsWithChildren<MpdalDefaultType>) => {
+const Modal = ({ children }: PropsWithChildren) => {
+  const { isOpenModal, onClickToggle } = useModalStore();
+
   const onClickHandler = (e: React.MouseEvent) => {
     e.preventDefault();
     if (isOpenModal) {
-      onClickToggleModal();
+      onClickToggle();
     }
   };
 

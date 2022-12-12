@@ -6,30 +6,23 @@ import Modal from 'src/components/modal';
 import { useCoupons } from 'src/hooks/useCoupons';
 import CounponList from 'src/components/cart/coupon/CouponList';
 import { useCartStore } from 'src/store/useCartStore';
+import { useModalStore } from 'src/store/useModalStore';
 
 const Cart = () => {
-  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const { isOpenModal } = useModalStore();
   const { data } = useCoupons();
   const { coupons } = useCartStore();
-  console.log(coupons);
-
-  const onClickToggleModal = () => {
-    setIsOpenModal(!isOpenModal);
-  };
 
   return (
     <>
       <CartLayout>
         {isOpenModal && (
-          <Modal
-            onClickToggleModal={onClickToggleModal}
-            isOpenModal={isOpenModal}
-          >
+          <Modal>
             <CounponList />
           </Modal>
         )}
         <CartItems />
-        <CartInformation onClickToggleModal={onClickToggleModal} />
+        <CartInformation/>
       </CartLayout>
     </>
   );
