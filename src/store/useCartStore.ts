@@ -1,17 +1,23 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable arrow-body-style */
 import create from 'zustand';
-import { ProductInfoType } from 'src/type/index';
+import { ProductInfoType, CouponType } from 'src/type/index';
 
 type CartStateType = {
   cart: ProductInfoType[];
+  coupons: CouponType[];
+  adjustedCoupon: CouponType | string;
   addCartItem: (item: any) => void;
   removeCartItem: (item_no: number) => void;
+  getCoupons: (data: any) => void;
+  adjustCoupons: (title: string) => void;
 };
 
 export const useCartStore = create<CartStateType>((set) => ({
   //initial state
   cart: [],
+  coupons: [],
+  adjustedCoupon: '',
   addCartItem: (item: any) => {
     set((state) => {
       const isPresent = state.cart.find(
@@ -44,7 +50,6 @@ export const useCartStore = create<CartStateType>((set) => ({
           ...state,
         };
       }
-
       const updatedCart = state.cart
         .map((storedItem) =>
           storedItem.item_no === item_no
@@ -56,6 +61,25 @@ export const useCartStore = create<CartStateType>((set) => ({
       return {
         ...state,
         cart: updatedCart,
+      };
+    });
+  },
+  getCoupons: (coupons) => {
+    set((state) => ({
+      ...state,
+      coupons,
+    }));
+  },
+  adjustCoupons: (title) => {
+    console.log(title);
+    set((state) => {
+      const getAdjustedCoupon = state.coupons.filter((coupon) =>
+        coupon.title === title ? { ...coupon } : null,
+      );
+      console.log(getAdjustedCoupon);
+      return {
+        ...state,
+        adjustedCoupon: getAdjustedCoupon,
       };
     });
   },
