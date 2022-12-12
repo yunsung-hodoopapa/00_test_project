@@ -103,19 +103,18 @@ const productItems = [
   },
 ];
 
-// coupons.js
-// const coupons = [
-//   {
-//     type: 'rate',
-//     title: '10% 할인 쿠폰',
-//     discountRate: 10,
-//   },
-//   {
-//     type: 'amount',
-//     title: '10,000원 할인 쿠폰',
-//     discountAmount: 10000,
-//   },
-// ];
+const coupons = [
+  {
+    type: 'rate',
+    title: '10% 할인 쿠폰',
+    discountRate: 10,
+  },
+  {
+    type: 'amount',
+    title: '10,000원 할인 쿠폰',
+    discountAmount: 10000,
+  },
+];
 
 export const handlers = [
   // 아이템 목록 가져오기
@@ -136,5 +135,8 @@ export const handlers = [
         isFirstPage: page === 0,
       }),
     );
+  }),
+  rest.get('http://backend.dev/api/coupons', (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({ coupons }));
   }),
 ];
