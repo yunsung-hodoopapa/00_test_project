@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useProducts } from 'src/hooks/useProducts';
-import Pagination from 'src/components/pagination';
+import Pagination from 'src/components/Pagination';
 import ProductCard from 'src/components/productCard';
 import { Key } from 'react';
 import styled from '@emotion/styled';
@@ -26,6 +26,8 @@ const ProductList = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const { data } = useProducts(currentPage);
 
+  console.log(data?.totalPages);
+
   return (
     <ContentWrap>
       <ListContainer>
@@ -34,7 +36,12 @@ const ProductList = () => {
             return <ProductCard item={item} key={index} />;
           })}
       </ListContainer>
-      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} />
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        hasMore={data?.hasMore}
+        totalPages={data?.totalPages}
+      />
     </ContentWrap>
   );
 };

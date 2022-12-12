@@ -122,7 +122,7 @@ export const handlers = [
     const size = Number(req.params.size);
     const page = Number(req.params.page);
     const totalCount = productItems.length;
-    const totalPages = Math.round(totalCount / size);
+    const totalPages = Math.ceil(totalCount / size);
     return res(
       ctx.status(200),
       ctx.json({
