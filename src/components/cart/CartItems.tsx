@@ -39,6 +39,8 @@ const CartItems = () => {
     } else if (!e.target.checked) {
       console.log('전체선택 해제');
       setCheckedItems([]);
+    } else if (!checkedItems.length) {
+      setCheckedItems([]);
     }
   };
 
@@ -52,7 +54,7 @@ const CartItems = () => {
         <input
           type="checkbox"
           onChange={handleAllItemCheck}
-          disabled={!checkedItems.length}
+          checked={checkedItems.length === cart.length}
         />
       </header>
       <GridContainer>
