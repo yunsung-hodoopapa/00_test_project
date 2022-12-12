@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import Button from 'src/components/common/Button';
@@ -36,7 +35,7 @@ const CartOptionWrap = styled.div`
 
 const CartItemCard = (props) => {
   const {
-    cartItem: { item_no, item_name, detail_image_url, price, score, quantity },
+    cartItem: { item_no, item_name, detail_image_url, price, quantity },
     handleSingleCheck,
     checkedItems,
   } = props;
@@ -44,10 +43,6 @@ const CartItemCard = (props) => {
   const { removeCartItem, addCartItem } = useCartStore();
 
   const itemId = item_no.toString();
-
-  useEffect(() => {
-    console.log(checkedItems);
-  }, [checkedItems]);
 
   return (
     <ItemWrap>
