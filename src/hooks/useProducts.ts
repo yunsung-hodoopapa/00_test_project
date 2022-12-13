@@ -13,10 +13,12 @@ const useProducts = (page: number) => {
         const sortingData = data.contents.sort((a: any, b: any) => {
           return b.score - a.score;
         });
-        const hasMore = data.totalPages > page;
+        const hasMore = data.totalPages > page + 1;
+        const totalPages = data.totalPages;
         return {
           sortingData,
           hasMore,
+          totalPages,
         };
       },
     },

@@ -7,3 +7,10 @@ export type ProductInfoType = {
   availableCoupon?: boolean;
   quantity?: any;
 };
+
+export type CouponType = {
+  type: string;
+  title: string;
+  discountRate?: number;
+  discountAmount?: number;
+};
