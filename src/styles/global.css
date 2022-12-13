@@ -1,7 +1,8 @@
 html,
 body {
-  padding: 0;
-  margin: 0;
+  padding: 0px;
+  margin: 0px;
+  font-size: 62.5%;
 }
 
 a {
@@ -11,4 +12,13 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+span {
+  font-size: 1.4rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin: 0px;
 }
