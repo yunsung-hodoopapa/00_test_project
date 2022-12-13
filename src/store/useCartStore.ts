@@ -24,6 +24,13 @@ export const useCartStore = create<CartStateType>((set) => ({
   adjustedCoupon: '',
   addCartItem: (item: any) => {
     set((state) => {
+      if (state.cart.length === 3) {
+        console.log('더이상 장바구니 추가는 무리');
+        return {
+          ...state,
+          cart: state.cart,
+        };
+      }
       const isPresent = state.cart.find(
         (presentItem) => presentItem.item_no === item.item_no,
       );
