@@ -28,3 +28,11 @@ export type AmountCouponType = {
   discountRate: number;
   discountAmount: number;
 };
+
+export type CartItemType = {
+  item_no: string;
+  item_name: string;
+  detail_image_url: string;
+  price: string;
+  quantity: string;
+};
