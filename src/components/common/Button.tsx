@@ -1,13 +1,14 @@
-import React, { ReactElement, ReactNode, ButtonHTMLAttributes } from 'react';
-import styled from '@emotion/styled';
+import React, { ReactNode, ButtonHTMLAttributes } from 'react';
+import theme from 'src/styles/theme';
+import { themeId } from 'src/styles/emotion';
+import { css } from '@emotion/react';
 
 type ButtonStyleType = {
-  width?: string;
-  height?: string;
-  borderColor?: string;
-  borderRadius?: string;
-  fontColor?: string;
-  fontSize?: string;
+  marginRight: string;
+  size?: 'SMALL' | 'MEDIUM' | 'LARGE';
+  label: 'string';
+  isBorder: boolean;
+  themeId?: themeId;
 };
 
 interface ButtonProps
@@ -19,17 +20,53 @@ interface ButtonProps
   disabled?: boolean;
 }
 
-const CustomButton = styled.button`
-  width: auto;
-  height: auto;
-  border-color: grey;
-  border-radius: 6px;
-  color: tomato;
-  size: 1rem;
-`;
+const Button = ({
+  children,
+  marginRight,
+  size = 'MEDIUM',
+  themeId,
+  isBorder = true,
+  onClick,
+}: ButtonProps) => {
+  const height =
+    size === 'SMALL' ? '1.5rem' : size === 'MEDIUM' ? '2rem' : '3rem';
+  const padding =
+    size === 'SMALL' ? '0.75rem' : size === 'MEDIUM' ? '1rem' : '2rem';
+  const fontSize =
+    size === 'SMALL' ? '0.9rem' : size === 'MEDIUM' ? '1rem' : '1.5rem';
+  const borderRadius =
+    size === 'SMALL' ? '0.25rem' : size === 'MEDIUM' ? '0.75rem' : '1rem';
 
-const Button = ({ children, ...rest }: ButtonProps): ReactElement => {
-  return <CustomButton {...rest}>{children}</CustomButton>;
+  const buttonStyle = css({
+    paddingLeft: `${padding}`,
+    paddingRight: `${padding}`,
+    marginRight: `${marginRight}`,
+    fontSize: `${fontSize}`,
+    borderRadius: `${borderRadius}`,
+    height: `${height}`,
+    backgroundColor: isBorder ? 'white' : `${theme[themeId].background}`,
+    border: isBorder ? `1px solid ${theme[themeId].background}` : 'none',
+    color: isBorder
+      ? `${theme[themeId].color}`
+      : `${theme[themeId].background}`,
+    outline: 'none',
+    fontWeight: 'bold',
+    wordBreak: 'keep-all',
+    corsor: 'poiner',
+    transition: '0.12s all ease-in',
+    '&:hover': {
+      background: `${theme[themeId].background}`,
+      color: 'white',
+    },
+  });
+
+  return (
+    <>
+      <button css={buttonStyle} onClick={onClick}>
+        {children}
+      </button>
+    </>
+  );
 };
 
 export default Button;
