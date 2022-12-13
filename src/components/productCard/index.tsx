@@ -13,7 +13,6 @@ const StyledCard = styled.div`
   width: 250px;
   margin: 10px 10px;
   transition: all 250ms ease-in-out;
-  border: 1px solid grey;
   border-radius: 8px;
 `;
 
@@ -26,6 +25,7 @@ const QuantitySelectorWrap = styled.div`
 
 const ProductInfomationWrap = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
 `;
 
@@ -53,11 +53,11 @@ const ProductCard = (props: any) => {
         <span>{item_name}</span>
         <span>{price}</span>
       </ProductInfomationWrap>
-      <QuantitySelectorWrap>
+      {/* <QuantitySelectorWrap>
         <Button onClick={() => removeCartItem(item_no)}>빼기</Button>
         <span>{currentItem?.quantity | 0}</span>
         <Button onClick={() => addCartItem(props.item)}>넣기 </Button>
-      </QuantitySelectorWrap>
+      </QuantitySelectorWrap> */}
     </StyledCard>
   );
 };
