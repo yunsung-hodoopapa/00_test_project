@@ -14,10 +14,11 @@ type CartStateType = {
   selectedIds: string[];
   adjustedCoupon: RateCouponType | AmountCouponType;
   addCartItem: (item: any) => void;
-  removeCartItem: (item_no: number) => void;
+  removeCartItem: (item_no: string) => void;
   getCoupons: (data: any) => void;
   adjustCoupons: (title: string) => void;
   getSelectedIds: (selectedIds: string[]) => void;
+  removeCartAllItem: () => void;
   eraseCoupons: () => void;
 };
 
@@ -77,6 +78,14 @@ export const useCartStore = create<CartStateType>((set) => ({
       return {
         ...state,
         cart: updatedCart,
+      };
+    });
+  },
+  removeCartAllItem: () => {
+    set((state) => {
+      return {
+        ...state,
+        cart: [],
       };
     });
   },
