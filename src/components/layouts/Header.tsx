@@ -21,7 +21,7 @@ const Header = () => {
     <StyledHeader>
       <div
         onClick={() => {
-          return router.push('/');
+          return router.push('/products');
         }}
       >
         29cm 채용과제
