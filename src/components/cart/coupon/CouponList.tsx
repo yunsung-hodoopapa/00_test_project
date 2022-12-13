@@ -14,7 +14,7 @@ const CounponList = () => {
   const { coupons } = useCartStore();
   return (
     <ListContainer>
-      <h3>쿠폰목록</h3>
+      <h2>쿠폰목록</h2>
       {coupons.length &&
         coupons.map((coupon, index) => {
           return <CouponCard coupon={coupon} key={index} />;
