@@ -1,5 +1,8 @@
 import Layouts from 'src/components/layouts/Layouts';
 import React, { FC } from 'react';
+import FlexBox from 'src/components/common/FlexBox';
+
+import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 
 type CartLayoutType = {
@@ -8,22 +11,35 @@ type CartLayoutType = {
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 400px;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* align-items: center; */
   min-height: calc(100vh - 300px);
-  border: 1px solid red;
-  margin-right: auto;
-  margin-left: auto;
+  border: none;
   padding: 10px 20px;
+  /* box-shadow: 0 0 30px rgba(30, 30, 30, 0.185); */
 `;
 
 const CartLayout: FC<CartLayoutType> = ({ children }) => {
   return (
     <Layouts>
-      <Container>
+      <FlexBox
+        css={css`
+          justify-content: center;
+        `}
+      >
         <h2>장바구니</h2>
-        {children}
-      </Container>
+      </FlexBox>
+      <div>
+        <hr
+          css={css`
+            width: 100%;
+            height: 3px;
+            background-color: black;
+          `}
+        />
+      </div>
+      <Container>{children}</Container>
     </Layouts>
   );
 };
