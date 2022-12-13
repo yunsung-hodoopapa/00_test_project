@@ -7,6 +7,7 @@ const global = css`
     margin: 0px;
     font-size: 62.5%;
     font-family: sans-serif;
+  }
 
   a {
     color: inherit;
@@ -24,6 +25,10 @@ const global = css`
   h1 {
     font-size: 2.5rem;
     margin: 0px;
+  }
+
+  h2 {
+    font-size: 2rem;
   }
 `;
 
