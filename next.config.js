@@ -1,6 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/products',
+        permanent: false,
+      },
+    ];
+  },
   images: {
     domains: ['localhost', 'img.29cm.co.kr'],
   },
