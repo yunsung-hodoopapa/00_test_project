@@ -6,7 +6,6 @@ import { css } from '@emotion/react';
 type ButtonStyleType = {
   marginRight: string;
   size?: 'SMALL' | 'MEDIUM' | 'LARGE';
-  label: 'string';
   isBorder: boolean;
   themeId?: themeId;
 };
@@ -27,6 +26,7 @@ const Button = ({
   themeId,
   isBorder = true,
   onClick,
+  disabled,
 }: ButtonProps) => {
   const height =
     size === 'SMALL' ? '1.5rem' : size === 'MEDIUM' ? '2rem' : '3rem';
@@ -44,25 +44,31 @@ const Button = ({
     fontSize: `${fontSize}`,
     borderRadius: `${borderRadius}`,
     height: `${height}`,
-    backgroundColor: isBorder ? 'white' : `${theme[themeId].background}`,
-    border: isBorder ? `1px solid ${theme[themeId].background}` : 'none',
+    backgroundColor: isBorder ? 'white' : `${theme[themeId]?.background}`,
+    border: isBorder ? `1px solid ${theme[themeId]?.background}` : 'none',
     color: isBorder
-      ? `${theme[themeId].color}`
-      : `${theme[themeId].background}`,
+      ? `${theme[themeId]?.color}`
+      : `${theme[themeId]?.background}`,
     outline: 'none',
     fontWeight: 'bold',
     wordBreak: 'keep-all',
-    corsor: 'poiner',
+    corsor: 'pointer',
     transition: '0.12s all ease-in',
     '&:hover': {
-      background: `${theme[themeId].background}`,
+      background: `${theme[themeId]?.background}`,
       color: 'white',
+    },
+    '&:disabled': {
+      background: 'grey',
+      cursor: 'revert',
+      transform: 'revert',
+      color: 'black',
     },
   });
 
   return (
     <>
-      <button css={buttonStyle} onClick={onClick}>
+      <button css={buttonStyle} onClick={onClick} disabled={disabled}>
         {children}
       </button>
     </>
