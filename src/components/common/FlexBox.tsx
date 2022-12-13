@@ -1,6 +1,5 @@
-import React, { ReactElement, ReactNode, ButtonHTMLAttributes } from 'react';
-import styled from '@emotion/styled';
-import { jsx, css } from '@emotion/react';
+import React, { ReactElement, ReactNode, HTMLAttributes } from 'react';
+import { css, SerializedStyles } from '@emotion/react';
 
 type BoxStyleType = {
   width?: string;
@@ -11,9 +10,7 @@ type BoxStyleType = {
   fontSize?: string;
 };
 
-interface BoxProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    BoxStyleType {
+interface BoxProps extends HTMLAttributes<HTMLElement>, BoxStyleType {
   children: ReactNode;
   className?: string;
 }
@@ -28,10 +25,6 @@ const FlexBox = ({ children, ...props }: BoxProps): ReactElement => {
       {children}
     </div>
   );
-};
-
-FlexBox.defaultProps = {
-  display: 'flex',
 };
 
 export default FlexBox;

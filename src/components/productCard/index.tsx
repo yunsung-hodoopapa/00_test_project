@@ -1,10 +1,13 @@
 /* eslint-disable arrow-body-style */
 /* eslint-disable no-unused-vars */
+import React from 'react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import Button from 'src/components/common/Button';
 import { useCartStore } from 'src/store/useCartStore';
 import Router from 'next/router';
+import FlexBox from 'src/components/common/FlexBox';
+import { css } from '@emotion/react';
 
 const StyledCard = styled.div`
   display: flex;
@@ -20,13 +23,17 @@ const QuantitySelectorWrap = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 50%;
 `;
 
 const ProductInfomationWrap = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+`;
+
+const IconWrapper = styled.div`
+  text-align: center;
+  cursor: pointer;
 `;
 
 const ProductCard = (props: any) => {
@@ -37,27 +44,63 @@ const ProductCard = (props: any) => {
 
   const { cart, addCartItem, removeCartItem } = useCartStore();
 
-  // const currentQuauntity = cart.reduce(
-  //   (prev, current) => prev + current.quantity,
-  //   0,
-  // );
-
   const currentItem = cart.filter(
     (cartItem) => cartItem.item_no === item_no,
   )[0];
 
+  const isStored = cart.find((item) => item.item_no === item_no);
+
+  const onClickToggleCart = () => {
+    if (!isStored) {
+      console.log('추가하기');
+      addCartItem(props.item);
+    } else {
+      console.log('빼기');
+      removeCartItem(item_no);
+    }
+  };
+
   return (
     <StyledCard>
       <Image src={detail_image_url} width={250} height={250} alt="상품이미지" />
-      <ProductInfomationWrap>
-        <span>{item_name}</span>
-        <span>{price}</span>
-      </ProductInfomationWrap>
-      {/* <QuantitySelectorWrap>
-        <Button onClick={() => removeCartItem(item_no)}>빼기</Button>
-        <span>{currentItem?.quantity | 0}</span>
-        <Button onClick={() => addCartItem(props.item)}>넣기 </Button>
-      </QuantitySelectorWrap> */}
+      <FlexBox
+        css={css`
+          width: 250px;
+          justify-content: space-between;
+          align-items: center;
+        `}
+      >
+        <FlexBox
+          css={css`
+            width: 180px;
+            flex-direction: column;
+            padding: 4px 2px;
+          `}
+        >
+          <span
+            css={css`
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            `}
+          >
+            {item_name}
+          </span>
+          <span>{price?.toLocaleString('ko-KR')}원</span>
+        </FlexBox>
+        <QuantitySelectorWrap>
+          <IconWrapper onClick={() => onClickToggleCart()}>
+            <Image
+              height={30}
+              width={30}
+              src={
+                isStored ? '/assets/cart_minus.svg' : '/assets/cart_plus.svg'
+              }
+              alt="장바구니"
+            />
+          </IconWrapper>
+        </QuantitySelectorWrap>
+      </FlexBox>
     </StyledCard>
   );
 };
