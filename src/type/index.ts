@@ -9,8 +9,22 @@ export type ProductInfoType = {
 };
 
 export type CouponType = {
+  type?: string;
+  title?: string;
+  discountAmount: number;
+  discountRate: number;
+};
+
+export type RateCouponType = {
   type: string;
   title: string;
-  discountRate?: number;
+  discountRate: number;
   discountAmount?: number;
+};
+
+export type AmountCouponType = {
+  type: string;
+  title: string;
+  discountRate: number;
+  discountAmount: number;
 };

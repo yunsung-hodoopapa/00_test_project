@@ -1,13 +1,18 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable arrow-body-style */
 import create from 'zustand';
-import { ProductInfoType, CouponType } from 'src/type/index';
+import {
+  ProductInfoType,
+  CouponType,
+  RateCouponType,
+  AmountCouponType,
+} from 'src/type/index';
 
 type CartStateType = {
   cart: ProductInfoType[];
   coupons: CouponType[];
   selectedIds: string[];
-  adjustedCoupon: CouponType | string;
+  adjustedCoupon: RateCouponType | AmountCouponType;
   addCartItem: (item: any) => void;
   removeCartItem: (item_no: number) => void;
   getCoupons: (data: any) => void;
@@ -21,7 +26,7 @@ export const useCartStore = create<CartStateType>((set) => ({
   cart: [],
   coupons: [],
   selectedIds: [],
-  adjustedCoupon: '',
+  adjustedCoupon: { type: '', title: '', discountAmount: 0, discountRate: 0 },
   addCartItem: (item: any) => {
     set((state) => {
       if (state.cart.length === 3) {

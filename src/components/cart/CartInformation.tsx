@@ -1,7 +1,12 @@
+/* eslint-disable no-prototype-builtins */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useCartStore } from 'src/store/useCartStore';
 import styled from '@emotion/styled';
-import { ProductInfoType, CouponType } from 'src/type/index';
+import {
+  ProductInfoType,
+  RateCouponType,
+  AmountCouponType,
+} from 'src/type/index';
 import { useModalStore } from 'src/store/useModalStore';
 
 const CartProceedWrap = styled.div`
@@ -53,51 +58,50 @@ const CartInformation = () => {
     return prev + current.quantity;
   }, 0);
 
-  const totalCost = selecteItemInfo?.reduce((prev, current) => {
-    const item = selecteItemInfo?.find((item) => {
-      return item?.item_no === current?.item_no;
-    });
-    const itemPrice = item?.price * current?.quantity;
+  const totalPrice = selecteItemInfo?.reduce((prev, current) => {
+    const itemPrice = current?.price * current?.quantity;
     return prev + itemPrice;
   }, 0);
 
   const getDiscountedPrice = (
-    adjustedCoupon: CouponType,
+    adjustedCoupon: RateCouponType | AmountCouponType,
     selecteItemInfo: ProductInfoType[],
   ) => {
-    if (!adjustedCoupon && !selecteItemInfo) {
+    if (!adjustedCoupon) {
       return 0;
-    } else {
+    }
+    console.log(adjustedCoupon);
+    if (adjustedCoupon?.type === 'rate') {
       console.log('비율 쿠폰 적용');
-      if (adjustedCoupon.type === 'rate') {
-        const salePriceWrap: Array<number> = [];
-        [...selecteItemInfo].map((selectItem) => {
-          if (selectItem?.hasOwnProperty('availableCoupon')) {
-            return selectItem.price;
-          } else {
-            const salePrice = selectItem.price / adjustedCoupon.discountRate;
-            salePriceWrap.push(salePrice);
-          }
-        });
-        const sumOfSalePrice = salePriceWrap.reduce((sum, currentValue) => {
-          return sum + currentValue;
-        }, 0);
-        return sumOfSalePrice;
-      } else {
-        console.log('정액 쿠폰 적용');
-        if (
-          selecteItemInfo.length === 1 &&
-          selecteItemInfo[0]?.hasOwnProperty('availableCoupon')
-        ) {
-          return 0;
+      const salePriceWrap: Array<number> = [];
+      [...selecteItemInfo].map((selectItem) => {
+        if (selectItem?.hasOwnProperty('availableCoupon')) {
+          return selectItem.price;
         } else {
-          return adjustedCoupon.discountAmount;
+          const salePrice = selectItem.price / adjustedCoupon?.discountRate;
+          salePriceWrap.push(salePrice);
         }
+      });
+      const sumOfSalePrice = salePriceWrap.reduce((sum, currentValue) => {
+        return sum + currentValue;
+      }, 0);
+      return sumOfSalePrice;
+    } else {
+      console.log('정액 쿠폰 적용');
+      if (
+        selecteItemInfo.length === 1 &&
+        selecteItemInfo[0]?.hasOwnProperty('availableCoupon')
+      ) {
+        return 0;
+      } else {
+        return adjustedCoupon?.discountAmount;
       }
     }
   };
 
-  const totalValueOfSale = getDiscountedPrice(adjustedCoupon, selecteItemInfo);
+  const totalValueOfSale =
+    getDiscountedPrice(adjustedCoupon, selecteItemInfo) || 0;
+  const FinalPrice = totalPrice - totalValueOfSale;
 
   return (
     <CartProceedWrap>
@@ -108,10 +112,7 @@ const CartInformation = () => {
       <FlexBetweenBox>
         <span>총 금액</span>
         <span>
-          {selecteItemInfo.length
-            ? (totalCost - totalValueOfSale).toLocaleString('ko-KR')
-            : 0}
-          원
+          {selecteItemInfo.length ? FinalPrice.toLocaleString('ko-KR') : 0}원
         </span>
       </FlexBetweenBox>
       <FlexBetweenBox>
