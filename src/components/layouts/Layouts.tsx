@@ -15,7 +15,6 @@ const Layouts: React.FC<Props> = ({ children }) => {
       </Head>
       <Header />
       <div>{children}</div>
-      <Footer />
     </>
   );
 };
