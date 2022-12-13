@@ -1,16 +1,13 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import CartItemCard from './CartItemCard';
-import styled from '@emotion/styled';
+import { css } from '@emotion/react';
 import { useCartStore } from 'src/store/useCartStore';
-
-const GridContainer = styled.div`
-  display: grid;
-  justify-content: space-between;
-`;
+import FlexBox from 'src/components/common/FlexBox';
+import Button from 'src/components/common/Button';
 
 const CartItems = () => {
-  const { cart, getSelectedIds } = useCartStore();
+  const { cart, getSelectedIds, removeCartAllItem } = useCartStore();
   const [checkedItems, setCheckedItems] = useState<string[] | []>([]);
 
   const handleSingleCheck = (checked: boolean, id: string) => {
@@ -47,19 +44,65 @@ const CartItems = () => {
   }, [checkedItems]);
 
   if (!cart?.length) {
-    return <div>카트에 아이템이 없습니다.</div>;
+    return <FlexBox>카트에 아이템이 없습니다.</FlexBox>;
   }
 
   return (
-    <>
-      <header>
-        <input
-          type="checkbox"
-          onChange={handleAllItemCheck}
-          checked={checkedItems.length === cart.length}
-        />
+    <div
+      css={css`
+        display: flex;
+        flex-direction: column;
+      `}
+    >
+      <header
+        css={css`
+          display: flex;
+          flex-direction: center;
+          justify-content: space-between;
+          padding: 8px 0px;
+        `}
+      >
+        <FlexBox
+          css={css`
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+          `}
+        >
+          <input
+            type="checkbox"
+            onChange={handleAllItemCheck}
+            checked={checkedItems.length === cart.length}
+          />
+          <span>전체선택</span>
+        </FlexBox>
+        <Button
+          isBorder={true}
+          themeId={'grey'}
+          marginRight={'0px'}
+          size={'MEDIUM'}
+          onClick={() => {
+            return removeCartAllItem();
+          }}
+        >
+          제거하기
+        </Button>
       </header>
-      <GridContainer>
+      <hr
+        css={css`
+          width: 100%;
+          height: 3px;
+          margin-bottom: 8px;
+          background-color: grey;
+        `}
+      />
+      <FlexBox
+        css={css`
+          flex-direction: column;
+          justify-content: flex-start;
+          gap: 1rem;
+        `}
+      >
         {cart.length &&
           cart?.map((cartItem, index) => {
             return (
@@ -71,8 +114,8 @@ const CartItems = () => {
               />
             );
           })}
-      </GridContainer>
-    </>
+      </FlexBox>
+    </div>
   );
 };
 

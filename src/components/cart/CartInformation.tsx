@@ -8,28 +8,23 @@ import {
   AmountCouponType,
 } from 'src/type/index';
 import { useModalStore } from 'src/store/useModalStore';
+import Button from 'src/components/common/Button';
+import FlexBox from 'src/components/common/FlexBox';
+import { css } from '@emotion/react';
 
-const CartProceedWrap = styled.div`
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
   padding: 8px 16px;
-  margin-left: 16px;
-  border: 1px solid tomato;
+  border: none;
+  box-shadow: 0 0 30px rgba(30, 30, 30, 0.185);
 `;
 
 const FlexBetweenBox = styled.div`
   display: flex;
   justify-content: space-between;
-`;
-
-const DialgButton = styled.button`
-  width: 130px;
-  height: 38px;
-  background-color: blueviolet;
-  color: white;
-  font-size: 1.2rem;
-  font-weight: 400;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
 `;
 
 const CartInformation = () => {
@@ -87,7 +82,6 @@ const CartInformation = () => {
       }, 0);
       return sumOfSalePrice;
     } else {
-      console.log('정액 쿠폰 적용');
       if (
         selecteItemInfo.length === 1 &&
         selecteItemInfo[0]?.hasOwnProperty('availableCoupon')
@@ -101,35 +95,77 @@ const CartInformation = () => {
 
   const totalValueOfSale =
     getDiscountedPrice(adjustedCoupon, selecteItemInfo) || 0;
-  const FinalPrice = totalPrice - totalValueOfSale;
+
+  const checkoutPrice = totalPrice - totalValueOfSale;
 
   return (
-    <CartProceedWrap>
-      <FlexBetweenBox>
-        <span>담은 수량</span>
-        <span>{totalNumber}개</span>
-      </FlexBetweenBox>
-      <FlexBetweenBox>
-        <span>총 금액</span>
-        <span>
-          {selecteItemInfo.length ? FinalPrice.toLocaleString('ko-KR') : 0}원
-        </span>
-      </FlexBetweenBox>
-      <FlexBetweenBox>
-        <DialgButton onClick={onClickToggle} disabled={!selectedIds.length}>
-          쿠폰 적용하기
-        </DialgButton>
-        <DialgButton
+    <Container>
+      <div>
+        <h2>결제예상금액</h2>
+        <FlexBox
+          css={css`
+            flex-direction: column;
+            gap: 10px;
+          `}
+        >
+          <FlexBetweenBox>
+            <span>담은 수량</span>
+            <span>{totalNumber}개</span>
+          </FlexBetweenBox>
+          <FlexBetweenBox>
+            <span>할인</span>
+            <span>{totalValueOfSale.toLocaleString('ko-KR')}원</span>
+          </FlexBetweenBox>
+          {adjustedCoupon && (
+            <FlexBetweenBox>
+              <span>적용 쿠폰</span>
+              <span>{adjustedCoupon.title}</span>
+            </FlexBetweenBox>
+          )}
+
+          <FlexBetweenBox>
+            <span>총 금액</span>
+            <span>
+              {selecteItemInfo.length
+                ? checkoutPrice.toLocaleString('ko-KR')
+                : 0}
+              원
+            </span>
+          </FlexBetweenBox>
+        </FlexBox>
+      </div>
+      <FlexBox
+        css={css`
+          justify-content: space-between;
+          gap: 10px;
+        `}
+      >
+        <Button
+          isBorder={true}
+          themeId={'grey'}
+          marginRight={'0px'}
+          size={'LARGE'}
           onClick={() => {
-            console.log('쿠폰제거');
+            return onClickToggle();
+          }}
+          disabled={!selectedIds.length}
+        >
+          쿠폰 적용
+        </Button>
+        <Button
+          isBorder={true}
+          themeId={'grey'}
+          marginRight={'0px'}
+          size={'LARGE'}
+          onClick={() => {
             return eraseCoupons();
           }}
-          disabled={!adjustedCoupon}
+          disabled={!selectedIds.length}
         >
-          쿠폰 제거하기
-        </DialgButton>
-      </FlexBetweenBox>
-    </CartProceedWrap>
+          쿠폰 제거
+        </Button>
+      </FlexBox>
+    </Container>
   );
 };
 
