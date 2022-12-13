@@ -91,8 +91,8 @@ const ProductCard = (props: any) => {
         <QuantitySelectorWrap>
           <IconWrapper onClick={() => onClickToggleCart()}>
             <Image
-              height={30}
-              width={30}
+              height={25}
+              width={25}
               src={
                 isStored ? '/assets/cart_minus.svg' : '/assets/cart_plus.svg'
               }

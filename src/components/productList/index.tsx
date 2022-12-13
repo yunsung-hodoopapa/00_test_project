@@ -10,11 +10,13 @@ const ContentWrap = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
+  padding-left: 0;
 `;
 
 const ListContainer = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   margin: 20px;
 `;
