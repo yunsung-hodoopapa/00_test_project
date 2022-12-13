@@ -42,13 +42,13 @@ const CartItems = () => {
     }
   };
 
-  if (!cart?.length) {
-    return <div>카트에 아이템이 없습니다.</div>;
-  }
-
   useEffect(() => {
     getSelectedIds(checkedItems);
   }, [checkedItems]);
+
+  if (!cart?.length) {
+    return <div>카트에 아이템이 없습니다.</div>;
+  }
 
   return (
     <>

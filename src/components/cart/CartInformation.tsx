@@ -65,7 +65,7 @@ const CartInformation = () => {
     adjustedCoupon: CouponType,
     selecteItemInfo: ProductInfoType[],
   ) => {
-    if (!adjustedCoupon) {
+    if (!adjustedCoupon && !selecteItemInfo) {
       return 0;
     } else {
       console.log('비율 쿠폰 적용');
@@ -98,7 +98,6 @@ const CartInformation = () => {
   };
 
   const totalValueOfSale = getDiscountedPrice(adjustedCoupon, selecteItemInfo);
-  console.log(totalValueOfSale);
 
   return (
     <CartProceedWrap>
