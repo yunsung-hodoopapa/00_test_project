@@ -72,19 +72,22 @@ const CartItemCard = (props) => {
       </FlexBox>
       <CartOptionWrap>
         <Button
+          isBorder={true}
+          themeId={'grey'}
+          marginRight={'1.25rem'}
+          size={'LARGE'}
           onClick={() => {
             return removeCartItem(item_no);
           }}
-        >
-          -
-        </Button>
+        />
+        {/* 
         <Button
           onClick={() => {
             return addCartItem(props.cartItem);
           }}
         >
           +
-        </Button>
+        </Button> */}
       </CartOptionWrap>
     </ItemWrap>
   );
