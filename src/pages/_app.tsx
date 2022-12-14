@@ -12,7 +12,7 @@ import { CacheProvider, EmotionCache } from '@emotion/react';
 import createEmotionCache from 'src/util/createEmotionCache';
 
 import { ThemeProvider, Global } from '@emotion/react';
-import theme from 'src/styles/theme';
+import theme from 'src/styles/Theme';
 import global from 'src/styles/global';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {

@@ -1,11 +1,12 @@
 import React, { Dispatch, SetStateAction } from 'react';
+import Button from './common/Button';
 import styled from '@emotion/styled';
 
 type PaginationPropType = {
   currentPage: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
   hasMore: boolean | undefined;
-  totalCount: number | undefined;
+  totalPages: number | undefined;
 };
 
 const PaginationWrap = styled.div`
@@ -16,39 +17,16 @@ const PaginationWrap = styled.div`
   margin: 16px;
 `;
 
-const Button = styled.button`
-  padding: 8px;
-  margin: 0;
-  background: black;
-  color: white;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-
-  &:hover {
-    background: tomato;
-    cursor: pointer;
-    transform: translateY(-2px);
-  }
-  &[disabled] {
-    background: grey;
-    cursor: revert;
-    transform: revert;
-  }
-  &[aria-current] {
-    background: blue;
-    font-weight: bold;
-    cursor: revert;
-    transform: revert;
-  }
-`;
-
 const Pagination = (props: PaginationPropType) => {
   const { currentPage, setCurrentPage, hasMore, totalPages } = props;
 
   return (
     <PaginationWrap>
       <Button
+        isBorder={true}
+        themeId={'grey'}
+        marginRight={'0px'}
+        size={'MEDIUM'}
         disabled={currentPage === 0}
         onClick={() => {
           return setCurrentPage((prev) => {
@@ -61,17 +39,25 @@ const Pagination = (props: PaginationPropType) => {
       {new Array(totalPages).fill('').map((num, i) => {
         return (
           <Button
+            isBorder={true}
+            themeId={'grey'}
+            marginRight={'0px'}
+            size={'MEDIUM'}
             key={i + 1}
             onClick={() => {
               return setCurrentPage(i);
             }}
-            aria-current={currentPage === i ? 'page' : null}
+            isActive={Boolean(currentPage === i)}
           >
             {i + 1}
           </Button>
         );
       })}
       <Button
+        isBorder={true}
+        themeId={'grey'}
+        marginRight={'0px'}
+        size={'MEDIUM'}
         disabled={!hasMore}
         onClick={() => {
           return setCurrentPage((prev) => {

@@ -1,14 +1,15 @@
 import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import { useCartStore } from 'src/store/useCartStore';
+import useCart from 'src/hooks/useCart';
+import { css } from '@emotion/react';
 
 const StyledHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 5px 10px;
-  background-color: black;
+  background-color: #667bda;
   color: white;
 `;
 
@@ -28,17 +29,20 @@ const CartQuantityWrap = styled.div`
   border-radius: 50%;
   width: 2.5rem;
   height: 2.5rem;
-  color: tomato;
+  color: #667bda;
   font-size: 1.5rem;
   text-align: center;
 `;
 
 const Header = () => {
   const router = useRouter();
-  const { cart } = useCartStore();
+  const { userCart } = useCart();
   return (
     <StyledHeader>
       <div
+        css={css`
+          cursor: pointer;
+        `}
         onClick={() => {
           return router.push('/products');
         }}
@@ -50,7 +54,6 @@ const Header = () => {
           return router.push('/cart');
         }}
       >
-        <CartQuantityWrap>{cart.length}</CartQuantityWrap>
         <Image
           height={25}
           width={25}
@@ -58,6 +61,7 @@ const Header = () => {
           src="/assets/ico_cart.svg"
           alt="장바구니"
         />
+        <CartQuantityWrap>{userCart.length}</CartQuantityWrap>
       </IconWrapper>
     </StyledHeader>
   );

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useProducts } from 'src/hooks/useProducts';
-import Pagination from 'src/components/Pagination';
+import Pagination from 'src/components/pagination';
 import ProductCard from 'src/components/productCard';
 import { Key } from 'react';
 import styled from '@emotion/styled';
@@ -19,6 +19,9 @@ const ListContainer = styled.div`
   justify-content: flex-start;
   flex-wrap: wrap;
   margin: 20px;
+  @media (max-width: 600px) {
+    justify-content: center;
+  }
 `;
 
 const ProductList = () => {

@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import React, { ChangeEvent } from 'react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import Button from 'src/components/common/Button';
@@ -9,7 +10,7 @@ import { CartItemType } from 'src/type';
 
 type CartCardType = {
   cartItem: CartItemType;
-  handleSingleCheck?: () => void;
+  handleSingleCheck?: (e: ChangeEvent<HTMLInputElement>) => void;
   checkedItems?: Array<string>;
 };
 
@@ -62,10 +63,8 @@ const CartItemCard = (props: CartCardType) => {
       >
         <input
           type="checkbox"
-          id={item_no}
-          onChange={(e) => {
-            return handleSingleCheck(e.target.checked, e.target.id);
-          }}
+          id={item_no.toString()}
+          onChange={handleSingleCheck}
           checked={checkedItems?.includes(itemId) ? true : false}
         />
         <ImageWrapper>
