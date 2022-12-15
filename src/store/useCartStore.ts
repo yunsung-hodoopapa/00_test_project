@@ -15,6 +15,7 @@ type CartStateType = {
   selectedIds: string[];
   adjustedCoupon: CouponType;
   addCartItem: (item: ProductInfoType) => void;
+  increaseQuantity: (item: ProductInfoType) => void;
   removeCartItem: (item_no: number) => void;
   removeCartAllItem: () => void;
   reStoreCart: (cart: ProductInfoType[]) => void;
@@ -59,6 +60,20 @@ export const useCartStore = create<CartStateType>(
               cart: [...state.cart, { ...item, quantity: 1 }],
             };
           }
+          const updatedCart = state.cart.map((presentItem) =>
+            presentItem.item_no === item.item_no
+              ? { ...presentItem, quantity: presentItem.quantity + 1 }
+              : presentItem,
+          );
+          return {
+            ...state,
+            cart: updatedCart,
+          };
+        });
+      },
+      increaseQuantity: (item) => {
+        set((state) => {
+          console.log('here');
           const updatedCart = state.cart.map((presentItem) =>
             presentItem.item_no === item.item_no
               ? { ...presentItem, quantity: presentItem.quantity + 1 }

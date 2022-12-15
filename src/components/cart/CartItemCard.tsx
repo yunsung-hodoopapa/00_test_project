@@ -53,7 +53,7 @@ const CartItemCard = (props: CartCardType) => {
     checkedItems,
   } = props;
 
-  const { removeCartItem, addCartItem } = useCartStore();
+  const { removeCartItem, increaseQuantity } = useCartStore();
 
   const itemId = item_no.toString();
 
@@ -143,7 +143,7 @@ const CartItemCard = (props: CartCardType) => {
                 marginRight={'0px'}
                 size={'SMALL'}
                 onClick={() => {
-                  addCartItem(props.cartItem);
+                  increaseQuantity(props.cartItem);
                 }}
               >
                 ⬆
