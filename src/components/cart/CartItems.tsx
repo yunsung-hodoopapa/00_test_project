@@ -46,7 +46,11 @@ const CartItems = () => {
   }, [checkedItems]);
 
   if (!userCart?.length) {
-    return <FlexBox>카트에 아이템이 없습니다.</FlexBox>;
+    return (
+      <FlexBox>
+        <span>카트에 아이템이 없습니다.</span>
+      </FlexBox>
+    );
   }
 
   return (
