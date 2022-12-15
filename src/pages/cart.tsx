@@ -1,9 +1,5 @@
-import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { css } from '@emotion/react';
-
 import { useModalStore } from 'src/store/useModalStore';
-import { couponApi } from 'src/api/couponApi';
-
 import CartLayout from 'src/components/layouts/CartLayout';
 import CartItems from 'src/components/cart/CartItems';
 import CartInformation from 'src/components/cart/CartInformation';
@@ -38,17 +34,4 @@ const Cart = () => {
   );
 };
 
-export async function getStaticProps() {
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery(['coupons'], () => {
-    return couponApi.getCoupons();
-  });
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-}
 export default Cart;

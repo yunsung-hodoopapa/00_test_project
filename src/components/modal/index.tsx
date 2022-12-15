@@ -18,7 +18,7 @@ const DialogBox = styled.dialog`
   justify-content: center;
   top: 50%;
   left: 50%;
-  width: 400px;
+  width: 40vh;
   height: 300px;
   transform: translate(-50%, -50%);
   border: none;
@@ -27,6 +27,9 @@ const DialogBox = styled.dialog`
   box-sizing: border-box;
   background-color: white;
   z-index: 1000;
+  @media (max-width: 500px) {
+    width: 50vh;
+  }
 `;
 
 const Backdrop = styled.div`
