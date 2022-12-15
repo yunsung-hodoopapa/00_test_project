@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { productApi } from 'src/api/productApi';
 import { ProductInfoType } from 'src/type';
 
-
 const useProducts = (page: number) => {
   return useQuery(
     ['products', page],
@@ -12,10 +11,12 @@ const useProducts = (page: number) => {
     {
       keepPreviousData: false,
       select: (data) => {
-        const sortingData = data.contents.sort((a: ProductInfoType, b: ProductInfoType) => {
-          return b.score - a.score;
-        });
-        const hasMore = data.totalPages > page + 1;
+        const sortingData = data.contents.sort(
+          (a: ProductInfoType, b: ProductInfoType) => {
+            return b.score - a.score;
+          },
+        );
+        const hasMore = data.totalPages > page;
         const totalPages = data.totalPages;
         return {
           sortingData,

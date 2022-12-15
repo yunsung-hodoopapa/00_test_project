@@ -6,7 +6,7 @@ import { css } from '@emotion/react';
 type ButtonStyleType = {
   marginRight: string;
   size?: 'SMALL' | 'MEDIUM' | 'LARGE';
-  isBorder: boolean;
+  isBorder?: boolean;
   themeId?: themeId;
 };
 
@@ -54,10 +54,6 @@ const Button = ({
     wordBreak: 'keep-all',
     corsor: 'pointer',
     transition: '0.12s all ease-in',
-    '&:hover': {
-      background: 'grey',
-      color: 'white',
-    },
     '&:disabled': {
       background: `${theme[themeId!].background}`,
       cursor: 'revert',

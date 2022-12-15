@@ -26,7 +26,7 @@ const ListContainer = styled.div`
 `;
 
 const ProductList = () => {
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const { data } = useProducts(currentPage);
 
   return (

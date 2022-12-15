@@ -15,8 +15,8 @@ const Home: NextPage = () => {
 export async function getStaticProps() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(['products', 0], () => {
-    return productApi.getProducts(0);
+  await queryClient.prefetchQuery(['products', 1], () => {
+    return productApi.getProducts(1);
   });
 
   return {

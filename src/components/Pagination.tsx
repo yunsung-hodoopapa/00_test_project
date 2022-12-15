@@ -27,8 +27,8 @@ const Pagination = (props: PaginationPropType) => {
         themeId={'grey'}
         marginRight={'0px'}
         size={'MEDIUM'}
-        disabled={currentPage === 0}
-        onClick={() => {
+        disabled={currentPage === 1}
+        onClick={(e) => {
           return setCurrentPage((prev) => {
             return prev - 1;
           });
@@ -39,15 +39,14 @@ const Pagination = (props: PaginationPropType) => {
       {new Array(totalPages).fill('').map((num, i) => {
         return (
           <Button
-            isBorder={true}
             themeId={'grey'}
             marginRight={'0px'}
             size={'MEDIUM'}
-            key={i + 1}
+            key={i}
             onClick={() => {
-              return setCurrentPage(i);
+              return setCurrentPage(i + 1);
             }}
-            isActive={Boolean(currentPage === i)}
+            isActive={Boolean(currentPage === i + 1)}
           >
             {i + 1}
           </Button>

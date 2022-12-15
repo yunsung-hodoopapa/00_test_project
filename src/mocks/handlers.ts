@@ -129,13 +129,13 @@ export const handlers = [
       return res(
         ctx.status(200),
         ctx.json({
-          contents: productItems.slice(page * size, (page + 1) * size),
+          contents: productItems.slice((page - 1) * size, page * size),
           pageNumber: page,
           pageSize: size,
           totalPages,
           totalCount,
           isLastPage: totalPages <= page,
-          isFirstPage: page === 0,
+          isFirstPage: page === 1,
         }),
       );
     },
