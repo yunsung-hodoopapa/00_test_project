@@ -19,12 +19,10 @@ const flexBoxStyle = css`
   display: flex;
 `;
 
-const FlexBox = ({ children, ...props }: BoxProps) => {
-  return (
-    <div css={flexBoxStyle} {...props}>
-      {children}
-    </div>
-  );
-};
+const FlexBox = ({ children, ...props }: BoxProps) => (
+  <div css={flexBoxStyle} {...props}>
+    {children}
+  </div>
+);
 
 export default FlexBox;

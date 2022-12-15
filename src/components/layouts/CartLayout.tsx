@@ -16,28 +16,26 @@ const Container = styled.div`
   /* box-shadow: 0 0 30px rgba(30, 30, 30, 0.185); */
 `;
 
-const CartLayout = ({ children }: PropsWithChildren) => {
-  return (
-    <Layouts>
-      <FlexBox
+const CartLayout = ({ children }: PropsWithChildren) => (
+  <Layouts>
+    <FlexBox
+      css={css`
+        justify-content: center;
+      `}
+    >
+      <h2>장바구니</h2>
+    </FlexBox>
+    <div>
+      <hr
         css={css`
-          justify-content: center;
+          width: 100%;
+          height: 3px;
+          background-color: black;
         `}
-      >
-        <h2>장바구니</h2>
-      </FlexBox>
-      <div>
-        <hr
-          css={css`
-            width: 100%;
-            height: 3px;
-            background-color: black;
-          `}
-        />
-      </div>
-      <Container>{children}</Container>
-    </Layouts>
-  );
-};
+      />
+    </div>
+    <Container>{children}</Container>
+  </Layouts>
+);
 
 export default CartLayout;

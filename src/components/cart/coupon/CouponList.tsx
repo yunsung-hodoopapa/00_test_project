@@ -27,9 +27,9 @@ const CounponList = () => {
       <h2>쿠폰목록</h2>
       {data &&
         coupons.length &&
-        coupons.map((coupon, index) => {
-          return <CouponCard coupon={coupon} key={index} />;
-        })}
+        coupons.map((coupon, index) => (
+          <CouponCard coupon={coupon} key={index} />
+        ))}
     </ListContainer>
   );
 };
@@ -37,9 +37,7 @@ const CounponList = () => {
 export async function getStaticProps() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(['coupons'], () => {
-    return couponApi.getCoupons();
-  });
+  await queryClient.prefetchQuery(['coupons'], () => couponApi.getCoupons());
 
   return {
     props: {

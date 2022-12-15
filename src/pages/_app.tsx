@@ -15,9 +15,7 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   import('../mocks');
 }
 const MyApp = (props: AppProps) => {
-  const [queryClient] = React.useState(() => {
-    return new QueryClient();
-  });
+  const [queryClient] = React.useState(() => new QueryClient());
 
   const { Component, pageProps } = props;
   return (

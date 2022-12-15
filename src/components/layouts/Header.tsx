@@ -43,17 +43,11 @@ const Header = () => {
         css={css`
           cursor: pointer;
         `}
-        onClick={() => {
-          return router.push('/products');
-        }}
+        onClick={() => router.push('/products')}
       >
         <h1>호두파파 스토어</h1>
       </div>
-      <IconWrapper
-        onClick={() => {
-          return router.push('/cart');
-        }}
-      >
+      <IconWrapper onClick={() => router.push('/cart')}>
         <Image
           height={25}
           width={25}

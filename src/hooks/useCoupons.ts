@@ -4,18 +4,12 @@ import { useCartStore } from 'src/store/useCartStore';
 
 const useCoupons = () => {
   const { getCoupons } = useCartStore();
-  return useQuery(
-    ['counpons'],
-    () => {
-      return couponApi.getCoupons();
+  return useQuery(['counpons'], () => couponApi.getCoupons(), {
+    onSuccess: (data) => {
+      const { coupons } = data;
+      getCoupons(coupons);
     },
-    {
-      onSuccess: (data) => {
-        const { coupons } = data;
-        getCoupons(coupons);
-      },
-    },
-  );
+  });
 };
 
 export { useCoupons };

@@ -42,9 +42,10 @@ const CartInformation = () => {
     })
     .flat();
 
-  const totalNumber = selecteItemInfo.reduce((prev, current) => {
-    return prev + current.quantity;
-  }, 0);
+  const totalNumber = selecteItemInfo.reduce(
+    (prev, current) => prev + current.quantity,
+    0,
+  );
 
   const totalPrice = selecteItemInfo?.reduce((prev, current) => {
     const itemPrice = current?.price * current?.quantity;
@@ -69,9 +70,10 @@ const CartInformation = () => {
           salePriceWrap.push(salePrice);
         }
       });
-      const sumOfSalePrice = salePriceWrap.reduce((sum, currentValue) => {
-        return sum + currentValue;
-      }, 0);
+      const sumOfSalePrice = salePriceWrap.reduce(
+        (sum, currentValue) => sum + currentValue,
+        0,
+      );
       if (sumOfSalePrice === 0) {
         // 할인불가능한 상태임으로 쿠폰을 제거한다.
         eraseCoupons();
@@ -89,9 +91,7 @@ const CartInformation = () => {
         }
       });
       const sumOfSalePrice = couponValiditemPriceWrap.reduce(
-        (sum, currentValue) => {
-          return sum + currentValue;
-        },
+        (sum, currentValue) => sum + currentValue,
         0,
       );
       if (sumOfSalePrice < adjustedCoupon.discountAmount) {
@@ -159,9 +159,7 @@ const CartInformation = () => {
           themeId={'grey'}
           marginRight={'0px'}
           size={'LARGE'}
-          onClick={() => {
-            return onClickToggle();
-          }}
+          onClick={() => onClickToggle()}
           disabled={!selectedIds.length}
         >
           쿠폰 적용
@@ -172,9 +170,7 @@ const CartInformation = () => {
           themeId={'grey'}
           marginRight={'0px'}
           size={'LARGE'}
-          onClick={() => {
-            return eraseCoupons();
-          }}
+          onClick={() => eraseCoupons()}
           disabled={!selectedIds.length || !adjustedCoupon.type}
         >
           쿠폰 제거

@@ -16,24 +16,18 @@ const CartItems = () => {
   const handleSingleCheck = (e: ChangeEvent<HTMLInputElement>) => {
     const { checked, id } = e.target;
     if (checked) {
-      setCheckedItems((prev) => {
-        return [...prev, id];
-      });
+      setCheckedItems((prev) => [...prev, id]);
     } else if (!checked) {
-      setCheckedItems(
-        checkedItems.filter((el) => {
-          return el !== id;
-        }),
-      );
+      setCheckedItems(checkedItems.filter((el) => el !== id));
     }
   };
 
   const handleAllItemCheck = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       const checkedItemArray: Array<string> = [];
-      cart.forEach((cartItem) => {
-        return checkedItemArray.push(cartItem.item_no.toString());
-      });
+      cart.forEach((cartItem) =>
+        checkedItemArray.push(cartItem.item_no.toString()),
+      );
       setCheckedItems(checkedItemArray);
     } else if (!e.target.checked) {
       setCheckedItems([]);
@@ -112,16 +106,14 @@ const CartItems = () => {
         `}
       >
         {userCart.length &&
-          userCart?.map((cartItem, index) => {
-            return (
-              <CartItemCard
-                key={index}
-                cartItem={cartItem}
-                handleSingleCheck={handleSingleCheck}
-                checkedItems={checkedItems}
-              />
-            );
-          })}
+          userCart?.map((cartItem, index) => (
+            <CartItemCard
+              key={index}
+              cartItem={cartItem}
+              handleSingleCheck={handleSingleCheck}
+              checkedItems={checkedItems}
+            />
+          ))}
       </FlexBox>
     </div>
   );
