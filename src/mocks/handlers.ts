@@ -119,10 +119,11 @@ const coupons = [
 export const handlers = [
   // 아이템 목록 가져오기
   rest.get(
-    'http://backend.dev/api/products/page=:page/size=:size',
+    'http://backend.dev/api/products?page=page&size=size',
     (req, res, ctx) => {
-      const size = Number(req.params.size);
-      const page = Number(req.params.page);
+      const params = req.url.searchParams;
+      const page = Number(params.get('page'));
+      const size = Number(params.get('size'));
       const totalCount = productItems.length;
       const totalPages = Math.ceil(totalCount / size);
       return res(

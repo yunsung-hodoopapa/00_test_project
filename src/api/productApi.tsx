@@ -4,7 +4,7 @@ class ProductApi {
   async getProducts(page: number) {
     const size = 5;
     const res = await api.callApi({
-      url: `${HOME_URL}/api/products/page=${page}/size=${size}`,
+      url: `${HOME_URL}/api/products?page=${page}&size=${size}`,
       method: 'GET',
     });
     return res.data;
