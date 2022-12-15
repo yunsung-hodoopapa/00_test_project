@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode, HTMLAttributes } from 'react';
+import React, { ReactNode, HTMLAttributes } from 'react';
 import { css } from '@emotion/react';
 
 type BoxStyleType = {
@@ -19,7 +19,7 @@ const flexBoxStyle = css`
   display: flex;
 `;
 
-const FlexBox = ({ children, ...props }: BoxProps): ReactElement => {
+const FlexBox = ({ children, ...props }: BoxProps) => {
   return (
     <div css={flexBoxStyle} {...props}>
       {children}

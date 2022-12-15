@@ -1,13 +1,9 @@
+import React, { PropsWithChildren } from 'react';
 import Layouts from 'src/components/layouts/Layouts';
-import React, { FC } from 'react';
 import FlexBox from 'src/components/common/FlexBox';
 
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
-
-type CartLayoutType = {
-  children: React.ReactNode;
-};
 
 const Container = styled.div`
   display: flex;
@@ -20,7 +16,7 @@ const Container = styled.div`
   /* box-shadow: 0 0 30px rgba(30, 30, 30, 0.185); */
 `;
 
-const CartLayout: FC<CartLayoutType> = ({ children }) => {
+const CartLayout = ({ children }: PropsWithChildren) => {
   return (
     <Layouts>
       <FlexBox

@@ -1,12 +1,8 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import Head from 'next/head';
 import Header from './Header';
 
-type Props = {
-  children: React.ReactNode;
-};
-
-const Layouts: React.FC<Props> = ({ children }) => {
+const Layouts = ({ children }: PropsWithChildren) => {
   return (
     <>
       <Head>
