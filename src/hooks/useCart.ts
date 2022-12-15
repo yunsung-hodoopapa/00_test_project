@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import { ProductInfoType } from 'src/type/index';
 import { useCartStore } from 'src/store/useCartStore';
+import { ProductInfoType } from 'src/type/index';
 
 const useCart = () => {
   const [userCart, setUserCart] = useState<ProductInfoType[]>([]);

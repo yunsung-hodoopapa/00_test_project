@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
-import styled from '@emotion/styled';
-import Image from 'next/image';
-import useCart from 'src/hooks/useCart';
 import { css } from '@emotion/react';
+import styled from '@emotion/styled';
+import useCart from 'src/hooks/useCart';
+import Image from 'next/image';
 
 const StyledHeader = styled.div`
   display: flex;

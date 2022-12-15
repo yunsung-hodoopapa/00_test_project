@@ -4,12 +4,11 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-import type { AppProps } from 'next/app';
 import { ThemeProvider, Global } from '@emotion/react';
 import theme from 'src/styles/Theme';
 import global from 'src/styles/global';
+import type { AppProps } from 'next/app';
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
   import('../mocks');
@@ -25,7 +24,6 @@ const MyApp = (props: AppProps) => {
         <Hydrate state={pageProps.dehydratedState}>
           <Component {...pageProps} />
         </Hydrate>
-        <ReactQueryDevtools />
       </QueryClientProvider>
     </ThemeProvider>
   );

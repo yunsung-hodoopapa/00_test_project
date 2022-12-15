@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable arrow-body-style */
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
 import { StateCreator } from 'zustand';
@@ -100,12 +98,10 @@ export const useCartStore = create<CartStateType>(
         });
       },
       removeCartAllItem: () => {
-        set((state: CartStateType) => {
-          return {
-            ...state,
-            cart: [],
-          };
-        });
+        set((state: CartStateType) => ({
+          ...state,
+          cart: [],
+        }));
       },
       getCoupons: (coupons) => {
         set((state) => ({
@@ -126,17 +122,15 @@ export const useCartStore = create<CartStateType>(
         });
       },
       eraseCoupons: () => {
-        set((state) => {
-          return {
-            ...state,
-            adjustedCoupon: {
-              type: '',
-              title: '',
-              discountAmount: 0,
-              discountRate: 0,
-            },
-          };
-        });
+        set((state) => ({
+          ...state,
+          adjustedCoupon: {
+            type: '',
+            title: '',
+            discountAmount: 0,
+            discountRate: 0,
+          },
+        }));
       },
       getSelectedIds: (selectedIds) => {
         set((state) => ({

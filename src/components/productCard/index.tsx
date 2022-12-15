@@ -1,11 +1,11 @@
 /* eslint-disable arrow-body-style */
 import { useCallback } from 'react';
 import styled from '@emotion/styled';
-import Image from 'next/image';
-import { useCartStore } from 'src/store/useCartStore';
-import FlexBox from 'src/components/common/FlexBox';
 import { css } from '@emotion/react';
+import { useCartStore } from 'src/store/useCartStore';
 import useCart from 'src/hooks/useCart';
+import FlexBox from 'src/components/common/FlexBox';
+import Image from 'next/image';
 import { ProductInfoType } from 'src/type';
 
 type CardType = {
@@ -18,8 +18,8 @@ const StyledCard = styled.div`
   justify-content: start;
   width: 250px;
   margin: 10px 10px;
-  transition: all 250ms ease-in-out;
   border-radius: 8px;
+  transition: all 250ms ease-in-out;
 `;
 
 const QuantitySelectorWrap = styled.div`
@@ -56,15 +56,15 @@ const ProductCard = (props: CardType) => {
       <Image src={detail_image_url} width={250} height={250} alt="상품이미지" />
       <FlexBox
         css={css`
-          width: 250px;
           justify-content: space-between;
           align-items: center;
+          width: 250px;
         `}
       >
         <FlexBox
           css={css`
-            width: 180px;
             flex-direction: column;
+            width: 180px;
             padding: 4px 2px;
           `}
         >

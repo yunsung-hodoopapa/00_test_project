@@ -1,7 +1,7 @@
 const palette = {
   /* grey */
-  grey_1: '#2B3445', // Main Text
-  grey_2: '#373F50', // Paragraph
+  grey_1: '#2B3445',
+  grey_2: '#373F50', 
   grey_3: '#7D879C', // Low Priority form Title/Text
   grey_4: '#DAE1E7', // Border
   grey_5: '#F3F5F9', // Line Stroke

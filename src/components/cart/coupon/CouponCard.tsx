@@ -1,9 +1,8 @@
-/* eslint-disable arrow-body-style */
 import styled from '@emotion/styled';
-import { CouponType } from 'src/type/index';
 import Button from 'src/components/common/Button';
 import { useCartStore } from 'src/store/useCartStore';
 import { useModalStore } from 'src/store/useModalStore';
+import { CouponType } from 'src/type/index';
 
 type PropType = {
   coupon: CouponType;

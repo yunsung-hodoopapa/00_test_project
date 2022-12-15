@@ -9,11 +9,9 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* align-items: center; */
   min-height: calc(100vh - 300px);
-  border: none;
   padding: 10px 20px;
-  /* box-shadow: 0 0 30px rgba(30, 30, 30, 0.185); */
+  border: none;
 `;
 
 const CartLayout = ({ children }: PropsWithChildren) => (
