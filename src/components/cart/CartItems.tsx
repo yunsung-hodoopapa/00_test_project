@@ -19,7 +19,6 @@ const CartItems = () => {
         return [...prev, id];
       });
     } else if (!checked) {
-      console.log('here');
       setCheckedItems(
         checkedItems.filter((el) => {
           return el !== id;
@@ -41,8 +40,6 @@ const CartItems = () => {
       setCheckedItems([]);
     }
   };
-
-  console.log(cart);
 
   useEffect(() => {
     getSelectedIds(checkedItems);

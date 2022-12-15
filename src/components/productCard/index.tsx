@@ -52,10 +52,8 @@ const ProductCard = (props: any) => {
 
   const onClickToggleCart = () => {
     if (!isStored) {
-      console.log('추가하기');
       addCartItem(props.item);
     } else {
-      console.log('빼기');
       removeCartItem(item_no);
     }
   };
@@ -94,7 +92,9 @@ const ProductCard = (props: any) => {
               height={25}
               width={25}
               src={
-                isStored ? '/assets/remove_basket.svg' : '/assets/add_basket.svg'
+                isStored
+                  ? '/assets/remove_basket.svg'
+                  : '/assets/add_basket.svg'
               }
               alt="장바구니"
             />

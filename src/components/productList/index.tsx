@@ -28,8 +28,6 @@ const ProductList = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const { data } = useProducts(currentPage);
 
-  console.log(data?.totalPages);
-
   return (
     <ContentWrap>
       <ListContainer>
