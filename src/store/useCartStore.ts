@@ -15,7 +15,7 @@ type CartStateType = {
   cart: ProductInfoType[];
   coupons: CouponType[];
   selectedIds: string[];
-  adjustedCoupon: RateCouponType | AmountCouponType | '';
+  adjustedCoupon: CouponType;
   addCartItem: (item: ProductInfoType) => void;
   removeCartItem: (item_no: number) => void;
   removeCartAllItem: () => void;
@@ -104,7 +104,6 @@ export const useCartStore = create<CartStateType>(
           return {
             ...state,
             cart: [],
-            adjustedCoupon: '',
           };
         });
       },
@@ -130,7 +129,12 @@ export const useCartStore = create<CartStateType>(
         set((state) => {
           return {
             ...state,
-            adjustedCoupon: '',
+            adjustedCoupon: {
+              type: '',
+              title: '',
+              discountAmount: 0,
+              discountRate: 0,
+            },
           };
         });
       },

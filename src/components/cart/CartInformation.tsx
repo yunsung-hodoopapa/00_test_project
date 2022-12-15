@@ -1,12 +1,7 @@
 /* eslint-disable no-prototype-builtins */
-import { useEffect } from 'react';
 import { useCartStore } from 'src/store/useCartStore';
 import styled from '@emotion/styled';
-import {
-  ProductInfoType,
-  RateCouponType,
-  AmountCouponType,
-} from 'src/type/index';
+import { ProductInfoType, CouponType } from 'src/type/index';
 import { useModalStore } from 'src/store/useModalStore';
 import Button from 'src/components/common/Button';
 import FlexBox from 'src/components/common/FlexBox';
@@ -57,34 +52,54 @@ const CartInformation = () => {
   }, 0);
 
   const getDiscountedPrice = (
-    adjustedCoupon: RateCouponType | AmountCouponType | '',
+    adjustedCoupon: CouponType,
     selecteItemInfo: ProductInfoType[],
   ) => {
     if (!adjustedCoupon) {
       return 0;
     }
+    // 비율할인일 경우, 선택 아이템을 조회해서 할인 가능한 금액만 계산해서 리턴한다.
     if (adjustedCoupon?.type === 'rate') {
       const salePriceWrap: Array<number> = [];
       [...selecteItemInfo].map((selectItem) => {
         if (selectItem?.hasOwnProperty('availableCoupon')) {
-          return selectItem.price;
+          salePriceWrap.push(0);
         } else {
-          const salePrice = selectItem.price / adjustedCoupon?.discountRate;
+          const salePrice = selectItem.price / adjustedCoupon.discountRate;
           salePriceWrap.push(salePrice);
         }
       });
       const sumOfSalePrice = salePriceWrap.reduce((sum, currentValue) => {
         return sum + currentValue;
       }, 0);
+      if (sumOfSalePrice === 0) {
+        // 할인불가능한 상태임으로 쿠폰을 제거한다.
+        eraseCoupons();
+        return window.alert('할인 쿠폰을 적용할 수 없습니다.');
+      }
       return sumOfSalePrice;
     } else {
-      if (
-        selecteItemInfo.length === 1 &&
-        selecteItemInfo[0]?.hasOwnProperty('availableCoupon')
-      ) {
-        return 0;
+      // 정액 할인일 경우, 선택 아이템을 조회해서 할인 가능 여부를 조회 후 총 가격이 정액할인액보다 높은지 판단한다.
+      const couponValiditemPriceWrap: Array<number> = [];
+      [...selecteItemInfo].map((selectItem) => {
+        if (selectItem?.hasOwnProperty('availableCoupon')) {
+          couponValiditemPriceWrap.push(0);
+        } else {
+          couponValiditemPriceWrap.push(selectItem.price);
+        }
+      });
+      const sumOfSalePrice = couponValiditemPriceWrap.reduce(
+        (sum, currentValue) => {
+          return sum + currentValue;
+        },
+        0,
+      );
+      if (sumOfSalePrice < adjustedCoupon.discountAmount) {
+        // 할인불가능한 상태임으로 쿠폰을 제거한다.
+        eraseCoupons();
+        return window.alert('할인 쿠폰을 적용할 수 없습니다.');
       } else {
-        return adjustedCoupon?.discountAmount;
+        return adjustedCoupon.discountAmount;
       }
     }
   };
@@ -93,15 +108,6 @@ const CartInformation = () => {
     getDiscountedPrice(adjustedCoupon, selecteItemInfo) || 0;
 
   const checkoutPrice = totalPrice - totalValueOfSale;
-
-  useEffect(() => {
-    if (checkoutPrice < 0) {
-      eraseCoupons();
-      window.alert(
-        '할인 금액보다 구매가격이 적을 경우 쿠폰을 적용할 수 없습니다',
-      );
-    }
-  }, [checkoutPrice, eraseCoupons]);
 
   if (!userCart.length) {
     return <div></div>;
@@ -125,7 +131,7 @@ const CartInformation = () => {
             <span>할인</span>
             <span>{totalValueOfSale.toLocaleString('ko-KR')}원</span>
           </FlexBetweenBox>
-          {adjustedCoupon && (
+          {adjustedCoupon.type && (
             <FlexBetweenBox>
               <span>적용 쿠폰</span>
               <span>{adjustedCoupon.title}</span>

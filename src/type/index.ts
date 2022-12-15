@@ -8,24 +8,22 @@ export type ProductInfoType = {
   quantity?: any;
 };
 
-export type CouponType = {
+export interface CouponType {
   type: string;
   title: string;
   discountAmount: number;
   discountRate: number;
-};
+}
 
 export type RateCouponType = {
   type: string;
   title: string;
   discountRate: number;
-  discountAmount?: number;
 };
 
 export type AmountCouponType = {
   type: string;
   title: string;
-  discountRate: number;
   discountAmount: number;
 };
 

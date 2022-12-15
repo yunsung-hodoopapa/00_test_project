@@ -8,7 +8,8 @@ import Button from 'src/components/common/Button';
 import useCart from 'src/hooks/useCart';
 
 const CartItems = () => {
-  const { cart, getSelectedIds, removeCartAllItem } = useCartStore();
+  const { cart, getSelectedIds, removeCartAllItem, eraseCoupons } =
+    useCartStore();
   const { userCart } = useCart();
   const [checkedItems, setCheckedItems] = useState<string[]>([]);
 
@@ -88,7 +89,8 @@ const CartItems = () => {
           marginRight={'0px'}
           size={'MEDIUM'}
           onClick={() => {
-            return removeCartAllItem();
+            removeCartAllItem();
+            eraseCoupons();
           }}
         >
           제거하기
