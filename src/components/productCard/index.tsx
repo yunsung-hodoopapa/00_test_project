@@ -94,7 +94,7 @@ const ProductCard = (props: any) => {
               height={25}
               width={25}
               src={
-                isStored ? '/assets/cart_minus.svg' : '/assets/cart_plus.svg'
+                isStored ? '/assets/remove_basket.svg' : '/assets/add_basket.svg'
               }
               alt="장바구니"
             />

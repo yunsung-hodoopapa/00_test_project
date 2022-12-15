@@ -19,6 +19,9 @@ const ListContainer = styled.div`
   justify-content: flex-start;
   flex-wrap: wrap;
   margin: 20px;
+  @media (max-width: 600px) {
+    justify-content: center;
+  }
 `;
 
 const ProductList = () => {

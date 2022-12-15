@@ -1,5 +1,4 @@
 /* eslint-disable no-prototype-builtins */
-/* eslint-disable react-hooks/rules-of-hooks */
 import { useCartStore } from 'src/store/useCartStore';
 import styled from '@emotion/styled';
 import {
@@ -11,6 +10,7 @@ import { useModalStore } from 'src/store/useModalStore';
 import Button from 'src/components/common/Button';
 import FlexBox from 'src/components/common/FlexBox';
 import { css } from '@emotion/react';
+import useCart from 'src/hooks/useCart';
 
 const Container = styled.div`
   display: flex;
@@ -28,15 +28,16 @@ const FlexBetweenBox = styled.div`
 `;
 
 const CartInformation = () => {
-  const { cart, selectedIds, adjustedCoupon, eraseCoupons } = useCartStore();
+  const { selectedIds, adjustedCoupon, eraseCoupons } = useCartStore();
   const { onClickToggle } = useModalStore();
+  const { userCart } = useCart();
 
-  if (!cart.length) {
+  if (!userCart.length) {
     return <div></div>;
   }
 
   // 선택된 아이템만 결제금액을 계산 하도록 함수 추가
-  const selecteItemInfo = cart
+  const selecteItemInfo = userCart
     .map((item) => {
       let selectWrap: Array<ProductInfoType> = [];
       const itemId = item.item_no.toString();
@@ -59,7 +60,7 @@ const CartInformation = () => {
   }, 0);
 
   const getDiscountedPrice = (
-    adjustedCoupon: RateCouponType | AmountCouponType,
+    adjustedCoupon: RateCouponType | AmountCouponType | '',
     selecteItemInfo: ProductInfoType[],
   ) => {
     if (!adjustedCoupon) {
@@ -152,6 +153,7 @@ const CartInformation = () => {
         >
           쿠폰 적용
         </Button>
+
         <Button
           isBorder={true}
           themeId={'grey'}
@@ -160,7 +162,7 @@ const CartInformation = () => {
           onClick={() => {
             return eraseCoupons();
           }}
-          disabled={!selectedIds.length}
+          disabled={!selectedIds.length || !adjustedCoupon}
         >
           쿠폰 제거
         </Button>

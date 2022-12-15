@@ -1,16 +1,19 @@
-/* eslint-disable react-hooks/rules-of-hooks */
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, ChangeEvent, useEffect } from 'react';
 import CartItemCard from './CartItemCard';
 import { css } from '@emotion/react';
 import { useCartStore } from 'src/store/useCartStore';
 import FlexBox from 'src/components/common/FlexBox';
 import Button from 'src/components/common/Button';
+import useCart from 'src/hooks/useCart';
 
 const CartItems = () => {
   const { cart, getSelectedIds, removeCartAllItem } = useCartStore();
-  const [checkedItems, setCheckedItems] = useState<string[] | []>([]);
+  const { userCart } = useCart();
+  const [checkedItems, setCheckedItems] = useState<string[]>([]);
 
-  const handleSingleCheck = (checked: boolean, id: string) => {
+  const handleSingleCheck = (e: ChangeEvent<HTMLInputElement>) => {
+    const { checked, id } = e.target;
     if (checked) {
       setCheckedItems((prev) => {
         return [...prev, id];
@@ -39,11 +42,13 @@ const CartItems = () => {
     }
   };
 
+  console.log(cart);
+
   useEffect(() => {
     getSelectedIds(checkedItems);
   }, [checkedItems]);
 
-  if (!cart?.length) {
+  if (!userCart?.length) {
     return <FlexBox>카트에 아이템이 없습니다.</FlexBox>;
   }
 
@@ -72,7 +77,7 @@ const CartItems = () => {
           <input
             type="checkbox"
             onChange={handleAllItemCheck}
-            checked={checkedItems.length === cart.length}
+            checked={checkedItems.length === userCart.length}
           />
           <span>전체선택</span>
         </FlexBox>
@@ -103,8 +108,8 @@ const CartItems = () => {
           gap: 1rem;
         `}
       >
-        {cart.length &&
-          cart?.map((cartItem, index) => {
+        {userCart.length &&
+          userCart?.map((cartItem, index) => {
             return (
               <CartItemCard
                 key={index}

@@ -6,7 +6,7 @@ const palette = {
   grey_4: '#DAE1E7', // Border
   grey_5: '#F3F5F9', // Line Stroke
   /* primary */
-  primary: '#ff753c',
+  primary: '#667bda',
   primary_main: '#FF5D14',
   primary_back: '#FFE9DF',
   /* secondary */

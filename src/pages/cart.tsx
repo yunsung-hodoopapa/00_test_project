@@ -1,20 +1,19 @@
-import React from 'react';
+import { dehydrate, QueryClient } from '@tanstack/react-query';
+import { css } from '@emotion/react';
+
+import { useModalStore } from 'src/store/useModalStore';
+import { couponApi } from 'src/api/couponApi';
+
 import CartLayout from 'src/components/layouts/CartLayout';
 import CartItems from 'src/components/cart/CartItems';
 import CartInformation from 'src/components/cart/CartInformation';
 import Modal from 'src/components/modal';
 import CounponList from 'src/components/cart/coupon/CouponList';
-import { useModalStore } from 'src/store/useModalStore';
-import { useCoupons } from 'src/hooks/useCoupons';
-import { useCartStore } from 'src/store/useCartStore';
-
 import FlexBox from 'src/components/common/FlexBox';
-import { css } from '@emotion/react';
 
 const Cart = () => {
   const { isOpenModal } = useModalStore();
-  const { data } = useCoupons();
-  const { coupons } = useCartStore();
+
   return (
     <>
       {isOpenModal && (
@@ -38,4 +37,18 @@ const Cart = () => {
     </>
   );
 };
+
+export async function getStaticProps() {
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery(['coupons'], () => {
+    return couponApi.getCoupons();
+  });
+
+  return {
+    props: {
+      dehydratedState: dehydrate(queryClient),
+    },
+  };
+}
 export default Cart;

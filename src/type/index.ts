@@ -9,8 +9,8 @@ export type ProductInfoType = {
 };
 
 export type CouponType = {
-  type?: string;
-  title?: string;
+  type: string;
+  title: string;
   discountAmount: number;
   discountRate: number;
 };
@@ -30,9 +30,10 @@ export type AmountCouponType = {
 };
 
 export type CartItemType = {
-  item_no: string;
+  item_no: number;
   item_name: string;
   detail_image_url: string;
-  price: string;
-  quantity: string;
+  price: number;
+  quantity?: number;
+  score: number;
 };

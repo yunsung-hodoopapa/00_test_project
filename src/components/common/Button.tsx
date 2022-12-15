@@ -1,5 +1,5 @@
 import React, { ReactNode, ButtonHTMLAttributes } from 'react';
-import theme from 'src/styles/theme';
+import theme from 'src/styles/Theme';
 import { themeId } from 'src/styles/emotion';
 import { css } from '@emotion/react';
 
@@ -17,6 +17,7 @@ interface ButtonProps
   className?: string;
   onClick: () => void;
   disabled?: boolean;
+  isActive?: boolean;
 }
 
 const Button = ({
@@ -27,6 +28,7 @@ const Button = ({
   isBorder = true,
   onClick,
   disabled,
+  isActive,
 }: ButtonProps) => {
   const height =
     size === 'SMALL' ? '1.5rem' : size === 'MEDIUM' ? '2rem' : '3rem';
@@ -44,25 +46,23 @@ const Button = ({
     fontSize: `${fontSize}`,
     borderRadius: `${borderRadius}`,
     height: `${height}`,
-    backgroundColor: isBorder ? 'white' : `${theme[themeId]?.background}`,
-    border: isBorder ? `1px solid ${theme[themeId]?.background}` : 'none',
-    color: isBorder
-      ? `${theme[themeId]?.color}`
-      : `${theme[themeId]?.background}`,
+    backgroundColor: isActive ? `${theme[themeId!].hoverBackground}` : 'white',
+    border: isBorder ? `1px solid ${theme[themeId!].background}` : 'none',
+    color: isActive ? 'white' : `${theme[themeId!].color}`,
     outline: 'none',
     fontWeight: 'bold',
     wordBreak: 'keep-all',
     corsor: 'pointer',
     transition: '0.12s all ease-in',
     '&:hover': {
-      background: `${theme[themeId]?.background}`,
+      background: 'grey',
       color: 'white',
     },
     '&:disabled': {
-      background: 'grey',
+      background: `${theme[themeId!].background}`,
       cursor: 'revert',
       transform: 'revert',
-      color: 'black',
+      color: 'white',
     },
   });
 
