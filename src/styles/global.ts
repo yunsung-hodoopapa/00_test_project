@@ -7,6 +7,7 @@ const global = css`
     margin: 0px;
     font-size: 62.5%;
     font-family: sans-serif;
+    min-width: 340px;
   }
 
   a {

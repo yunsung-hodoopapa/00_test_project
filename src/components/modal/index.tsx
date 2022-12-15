@@ -18,24 +18,20 @@ const DialogBox = styled.dialog`
   justify-content: center;
   top: 50%;
   left: 50%;
-  width: 40vh;
+  width: 50vh;
   height: 300px;
   transform: translate(-50%, -50%);
+
   border: none;
   border-radius: 4px;
   box-shadow: 0 0 30px rgba(30, 30, 30, 0.185);
   box-sizing: border-box;
   background-color: white;
   z-index: 1000;
-  @media (max-width: 500px) {
-    width: 50vh;
-  }
 `;
 
 const Backdrop = styled.div`
   position: fixed;
-  width: 100vw;
-  height: 100vh;
   top: 0;
   left: 0;
   bottom: 0;
