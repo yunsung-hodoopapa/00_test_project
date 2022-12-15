@@ -121,7 +121,6 @@ const CartInformation = () => {
               <span>{adjustedCoupon.title}</span>
             </FlexBetweenBox>
           )}
-
           <FlexBetweenBox>
             <span>총 금액</span>
             <span>

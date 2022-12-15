@@ -1,9 +1,11 @@
 /* eslint-disable arrow-body-style */
+import { useCallback } from 'react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
 import { useCartStore } from 'src/store/useCartStore';
 import FlexBox from 'src/components/common/FlexBox';
 import { css } from '@emotion/react';
+import useCart from 'src/hooks/useCart';
 import { ProductInfoType } from 'src/type';
 
 type CardType = {
@@ -36,17 +38,18 @@ const ProductCard = (props: CardType) => {
     item: { item_no, item_name, detail_image_url, price },
   } = props;
 
-  const { cart, addCartItem, removeCartItem } = useCartStore();
+  const { addCartItem, removeCartItem } = useCartStore();
+  const { userCart } = useCart();
 
-  const isStored = cart.find((item) => item.item_no === item_no);
+  const isStored = userCart.find((item) => item.item_no === item_no);
 
-  const onClickToggleCart = () => {
+  const onClickToggleCart = useCallback(() => {
     if (!isStored) {
       addCartItem(props.item);
     } else {
       removeCartItem(item_no);
     }
-  };
+  }, [addCartItem, isStored, item_no, props.item, removeCartItem]);
 
   return (
     <StyledCard>

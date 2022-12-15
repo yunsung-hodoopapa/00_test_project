@@ -46,6 +46,7 @@ export const useCartStore = create<CartStateType>(
       addCartItem: (item: ProductInfoType) => {
         set((state) => {
           if (state.cart.length === 3) {
+            window.alert('아이템은 최대 3개까지 카트에 넣을 수 있습니다!');
             return {
               ...state,
               cart: state.cart,
