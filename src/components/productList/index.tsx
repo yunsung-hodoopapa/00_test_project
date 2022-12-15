@@ -4,6 +4,7 @@ import Pagination from 'src/components/Pagination';
 import ProductCard from 'src/components/productCard';
 import { Key } from 'react';
 import styled from '@emotion/styled';
+import { ProductInfoType } from 'src/type';
 
 const ContentWrap = styled.div`
   display: flex;
@@ -32,7 +33,7 @@ const ProductList = () => {
     <ContentWrap>
       <ListContainer>
         {data &&
-          data.sortingData.map((item: any, index: Key | null | undefined) => {
+          data.sortingData.map((item: ProductInfoType, index: Key) => {
             return <ProductCard item={item} key={index} />;
           })}
       </ListContainer>

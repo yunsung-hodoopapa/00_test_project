@@ -43,7 +43,7 @@ export const useCartStore = create<CartStateType>(
         discountAmount: 0,
         discountRate: 0,
       },
-      addCartItem: (item: any) => {
+      addCartItem: (item: ProductInfoType) => {
         set((state) => {
           if (state.cart.length === 3) {
             return {
@@ -114,7 +114,7 @@ export const useCartStore = create<CartStateType>(
         }));
       },
       adjustCoupons: (title) => {
-        set((state: any) => {
+        set((state: CartStateType) => {
           const getAdjustedCoupon = state.coupons.filter(
             (coupon: RateCouponType | AmountCouponType) =>
               coupon.title === title ? { ...coupon } : null,

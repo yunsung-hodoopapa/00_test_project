@@ -1,13 +1,14 @@
 /* eslint-disable arrow-body-style */
-/* eslint-disable no-unused-vars */
-import React from 'react';
 import styled from '@emotion/styled';
 import Image from 'next/image';
-import Button from 'src/components/common/Button';
 import { useCartStore } from 'src/store/useCartStore';
-import Router from 'next/router';
 import FlexBox from 'src/components/common/FlexBox';
 import { css } from '@emotion/react';
+import { ProductInfoType } from 'src/type';
+
+type CardType = {
+  item: ProductInfoType;
+};
 
 const StyledCard = styled.div`
   display: flex;
@@ -25,28 +26,17 @@ const QuantitySelectorWrap = styled.div`
   justify-content: space-between;
 `;
 
-const ProductInfomationWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
 const IconWrapper = styled.div`
   text-align: center;
   cursor: pointer;
 `;
 
-const ProductCard = (props: any) => {
-  // eslint-disable-next-line no-unused-vars
+const ProductCard = (props: CardType) => {
   const {
-    item: { item_no, item_name, detail_image_url, price, score },
+    item: { item_no, item_name, detail_image_url, price },
   } = props;
 
   const { cart, addCartItem, removeCartItem } = useCartStore();
-
-  const currentItem = cart.filter(
-    (cartItem) => cartItem.item_no === item_no,
-  )[0];
 
   const isStored = cart.find((item) => item.item_no === item_no);
 
