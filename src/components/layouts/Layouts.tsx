@@ -6,7 +6,8 @@ const Layouts = ({ children }: PropsWithChildren) => {
   return (
     <>
       <Head>
-        <title>29cm 과제 프로젝트</title>
+        <title>호두파파 스토어</title>
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <Header />
       <div>{children}</div>
