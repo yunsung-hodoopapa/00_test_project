@@ -66,9 +66,7 @@ const CartInformation = () => {
     if (!adjustedCoupon) {
       return 0;
     }
-    console.log(adjustedCoupon);
     if (adjustedCoupon?.type === 'rate') {
-      console.log('비율 쿠폰 적용');
       const salePriceWrap: Array<number> = [];
       [...selecteItemInfo].map((selectItem) => {
         if (selectItem?.hasOwnProperty('availableCoupon')) {

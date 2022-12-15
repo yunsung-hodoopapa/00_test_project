@@ -119,7 +119,6 @@ export const useCartStore = create<CartStateType>(
             (coupon: RateCouponType | AmountCouponType) =>
               coupon.title === title ? { ...coupon } : null,
           );
-          console.log(getAdjustedCoupon);
           return {
             ...state,
             adjustedCoupon: getAdjustedCoupon[0],
