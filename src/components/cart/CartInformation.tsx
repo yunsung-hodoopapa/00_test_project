@@ -175,7 +175,7 @@ const CartInformation = () => {
           onClick={() => {
             return eraseCoupons();
           }}
-          disabled={!selectedIds.length || !adjustedCoupon}
+          disabled={!selectedIds.length || !adjustedCoupon.type}
         >
           쿠폰 제거
         </Button>
