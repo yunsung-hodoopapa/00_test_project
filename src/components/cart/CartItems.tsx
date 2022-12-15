@@ -82,12 +82,13 @@ const CartItems = () => {
           themeId={'grey'}
           marginRight={'0px'}
           size={'MEDIUM'}
+          disabled={userCart.length !== checkedItems.length}
           onClick={() => {
             removeCartAllItem();
             eraseCoupons();
           }}
         >
-          제거하기
+          전체삭제
         </Button>
       </header>
       <hr
