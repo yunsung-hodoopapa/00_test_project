@@ -4,6 +4,6 @@
   "rules": {
     "react/no-unescaped-entities": "off",
     "@next/next/no-page-custom-font": "off",
-    "arrow-body-style": ["error", "always"]
+    "arrow-body-style": ["error", "as-needed"]
   }
 }

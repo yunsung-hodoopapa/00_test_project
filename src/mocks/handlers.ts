@@ -140,7 +140,7 @@ export const handlers = [
       );
     },
   ),
-  rest.get('http://backend.dev/api/coupons', (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json({ coupons }));
-  }),
+  rest.get('http://backend.dev/api/coupons', (req, res, ctx) =>
+    res(ctx.status(200), ctx.json({ coupons })),
+  ),
 ];

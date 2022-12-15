@@ -33,9 +33,9 @@ const ProductList = () => {
     <ContentWrap>
       <ListContainer>
         {data &&
-          data.sortingData.map((item: ProductInfoType, index: Key) => {
-            return <ProductCard item={item} key={index} />;
-          })}
+          data.sortingData.map((item: ProductInfoType, index: Key) => (
+            <ProductCard item={item} key={index} />
+          ))}
       </ListContainer>
       <Pagination
         currentPage={currentPage}

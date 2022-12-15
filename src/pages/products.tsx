@@ -4,20 +4,18 @@ import { productApi } from 'src/api/productApi';
 import ProductList from 'src/components/productList';
 import Layouts from 'src/components/layouts/Layouts';
 
-const Home: NextPage = () => {
-  return (
-    <Layouts>
-      <ProductList />
-    </Layouts>
-  );
-};
+const Home: NextPage = () => (
+  <Layouts>
+    <ProductList />
+  </Layouts>
+);
 
 export async function getStaticProps() {
   const queryClient = new QueryClient();
 
-  await queryClient.prefetchQuery(['products', 1], () => {
-    return productApi.getProducts(1);
-  });
+  await queryClient.prefetchQuery(['products', 1], () =>
+    productApi.getProducts(1),
+  );
 
   return {
     props: {
