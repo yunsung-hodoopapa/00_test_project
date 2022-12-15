@@ -118,24 +118,27 @@ const coupons = [
 
 export const handlers = [
   // 아이템 목록 가져오기
-  rest.get('http://backend.dev/api/products/:page/:size', (req, res, ctx) => {
-    const size = Number(req.params.size);
-    const page = Number(req.params.page);
-    const totalCount = productItems.length;
-    const totalPages = Math.ceil(totalCount / size);
-    return res(
-      ctx.status(200),
-      ctx.json({
-        contents: productItems.slice(page * size, (page + 1) * size),
-        pageNumber: page,
-        pageSize: size,
-        totalPages,
-        totalCount,
-        isLastPage: totalPages <= page,
-        isFirstPage: page === 0,
-      }),
-    );
-  }),
+  rest.get(
+    'http://backend.dev/api/products/page=:page/size=:size',
+    (req, res, ctx) => {
+      const size = Number(req.params.size);
+      const page = Number(req.params.page);
+      const totalCount = productItems.length;
+      const totalPages = Math.ceil(totalCount / size);
+      return res(
+        ctx.status(200),
+        ctx.json({
+          contents: productItems.slice(page * size, (page + 1) * size),
+          pageNumber: page,
+          pageSize: size,
+          totalPages,
+          totalCount,
+          isLastPage: totalPages <= page,
+          isFirstPage: page === 0,
+        }),
+      );
+    },
+  ),
   rest.get('http://backend.dev/api/coupons', (req, res, ctx) => {
     return res(ctx.status(200), ctx.json({ coupons }));
   }),
