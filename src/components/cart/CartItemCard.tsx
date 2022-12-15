@@ -30,7 +30,7 @@ const CartOptionWrap = styled.div`
   display: flex;
   flex-direction: column;
   width: 40px;
-  height: 80px;
+  height: 100px;
 `;
 
 const IconWrapper = styled.div`
@@ -41,7 +41,14 @@ const IconWrapper = styled.div`
 
 const CartItemCard = (props: CartCardType) => {
   const {
-    cartItem: { item_no, item_name, detail_image_url, price, quantity },
+    cartItem: {
+      item_no,
+      item_name,
+      detail_image_url,
+      price,
+      quantity,
+      availableCoupon,
+    },
     handleSingleCheck,
     checkedItems,
   } = props;
@@ -155,7 +162,19 @@ const CartItemCard = (props: CartCardType) => {
               </Button>
             </CartOptionWrap>
           </FlexBox>
-          <span>{itemPrice?.toLocaleString('ko-KR')}원</span>
+          <span>
+            {itemPrice?.toLocaleString('ko-KR')}원 <br />{' '}
+            {availableCoupon === false && (
+              <span
+                css={css`
+                  font-size: 1.2rem;
+                  color: red;
+                `}
+              >
+                할인불가
+              </span>
+            )}
+          </span>
         </div>
       </FlexBox>
     </ItemWrap>

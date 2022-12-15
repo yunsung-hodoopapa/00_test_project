@@ -34,4 +34,5 @@ export type CartItemType = {
   price: number;
   quantity?: number;
   score: number;
+  availableCoupon?: boolean;
 };
