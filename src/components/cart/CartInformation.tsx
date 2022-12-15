@@ -1,4 +1,5 @@
 /* eslint-disable no-prototype-builtins */
+import { useEffect } from 'react';
 import { useCartStore } from 'src/store/useCartStore';
 import styled from '@emotion/styled';
 import {
@@ -31,10 +32,6 @@ const CartInformation = () => {
   const { selectedIds, adjustedCoupon, eraseCoupons } = useCartStore();
   const { onClickToggle } = useModalStore();
   const { userCart } = useCart();
-
-  if (!userCart.length) {
-    return <div></div>;
-  }
 
   // 선택된 아이템만 결제금액을 계산 하도록 함수 추가
   const selecteItemInfo = userCart
@@ -96,6 +93,19 @@ const CartInformation = () => {
     getDiscountedPrice(adjustedCoupon, selecteItemInfo) || 0;
 
   const checkoutPrice = totalPrice - totalValueOfSale;
+
+  useEffect(() => {
+    if (checkoutPrice < 0) {
+      eraseCoupons();
+      window.alert(
+        '할인 금액보다 구매가격이 적을 경우 쿠폰을 적용할 수 없습니다',
+      );
+    }
+  }, [checkoutPrice, eraseCoupons]);
+
+  if (!userCart.length) {
+    return <div></div>;
+  }
 
   return (
     <Container>
