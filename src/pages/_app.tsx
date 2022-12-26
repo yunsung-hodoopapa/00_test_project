@@ -10,9 +10,10 @@ import theme from 'src/styles/Theme';
 import global from 'src/styles/global';
 import type { AppProps } from 'next/app';
 
-if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-  import('../mocks');
-}
+import setupMSW from 'src/mocks/setup';
+
+setupMSW();
+
 const MyApp = (props: AppProps) => {
   const [queryClient] = React.useState(() => new QueryClient());
 
