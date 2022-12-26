@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import styled from '@emotion/styled';
 import Button from 'src/components/common/Button';
+import * as Styled from './Pagination.style';
 
 type PaginationPropType = {
   currentPage: number;
@@ -9,19 +9,11 @@ type PaginationPropType = {
   totalPages: number | undefined;
 };
 
-const PaginationWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  margin: 16px;
-`;
-
 const Pagination = (props: PaginationPropType) => {
   const { currentPage, setCurrentPage, hasMore, totalPages } = props;
 
   return (
-    <PaginationWrap>
+    <Styled.Container>
       <Button
         isBorder={true}
         themeId={'grey'}
@@ -54,7 +46,7 @@ const Pagination = (props: PaginationPropType) => {
       >
         다음페이지
       </Button>
-    </PaginationWrap>
+    </Styled.Container>
   );
 };
 
