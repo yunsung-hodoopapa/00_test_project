@@ -16,13 +16,16 @@ export const handlers = [
     return res(
       ctx.status(200),
       ctx.json({
-        contents: products.slice((page - 1) * size, page * size),
-        pageNumber: page,
-        pageSize: size,
-        totalPages,
-        totalCount,
-        isLastPage: totalPages <= page,
-        isFirstPage: page === 1,
+        data : {
+          products: products.slice((page - 1) * size, page * size),
+          totalCount: products.length
+        }
+        // pageNumber: page,
+        // pageSize: size,
+        // totalPages,
+        // totalCount,
+        // isLastPage: totalPages <= page,
+        // isFirstPage: page === 1,
       }),
     );
   }),
