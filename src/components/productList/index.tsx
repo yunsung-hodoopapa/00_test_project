@@ -2,7 +2,7 @@ import React, { useState, Key } from 'react';
 import styled from '@emotion/styled';
 import { useProducts } from 'src/hooks/useProducts';
 import Pagination from 'src/components/Pagination';
-import ProductCard from 'src/components/ProductCard';
+import ProductCard from 'src/components/productCard';
 import { ProductInfoType } from 'src/type';
 
 const ContentWrap = styled.div`
