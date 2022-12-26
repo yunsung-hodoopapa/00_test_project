@@ -1,9 +1,10 @@
-import { api, HOME_URL } from './api';
+import { api } from './api';
+import { API_BASE_URL } from 'src/constants/urls';
 
 class CouponApi {
   async getCoupons() {
     const res = await api.callApi({
-      url: `${HOME_URL}/api/coupons`,
+      url: `${API_BASE_URL}/api/coupons`,
       method: 'GET',
     });
     return res.data;

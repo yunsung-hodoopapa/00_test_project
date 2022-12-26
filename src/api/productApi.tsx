@@ -1,10 +1,11 @@
-import { api, HOME_URL } from './api';
+import { api } from './api';
+import { API_BASE_URL } from 'src/constants/urls';
 
 class ProductApi {
   async getProducts(page: number) {
     const size = 5;
     const res = await api.callApi({
-      url: `${HOME_URL}/api/products?page=${page}&size=${size}`,
+      url: `${API_BASE_URL}/api/products?page=${page}&size=${size}`,
       method: 'GET',
     });
     return res.data;

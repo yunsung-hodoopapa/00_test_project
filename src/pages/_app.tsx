@@ -10,7 +10,7 @@ import theme from 'src/styles/Theme';
 import global from 'src/styles/global';
 import type { AppProps } from 'next/app';
 
-import setupMSW from 'src/mocks/setup';
+import setupMSW from 'src/api/setup';
 
 import { Header } from 'src/components/header';
 import Head from 'next/head';

@@ -8,8 +8,6 @@ interface ApiTypes {
   contentType?: string;
 }
 
-export const HOME_URL = 'http://backend.dev';
-
 class Api {
   callApi({ url, method, data, contentType = 'application/json' }: ApiTypes) {
     const requestParam: AxiosRequestConfig = {
