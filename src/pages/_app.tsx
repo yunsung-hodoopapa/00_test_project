@@ -12,21 +12,31 @@ import type { AppProps } from 'next/app';
 
 import setupMSW from 'src/mocks/setup';
 
+import { Header } from 'src/components/Header';
+import Head from 'next/head';
+
 setupMSW();
 
 const MyApp = (props: AppProps) => {
+  // 공통 컴포넌트 특히, 레이아웃은 _app.tsx에서 다루면 불필요한 사이드를 방지하는데 좋습니다.
   const [queryClient] = React.useState(() => new QueryClient());
-
   const { Component, pageProps } = props;
   return (
-    <ThemeProvider theme={theme}>
-      <Global styles={global} />
-      <QueryClientProvider client={queryClient}>
-        <Hydrate state={pageProps.dehydratedState}>
-          <Component {...pageProps} />
-        </Hydrate>
-      </QueryClientProvider>
-    </ThemeProvider>
+    <>
+      <Head>
+        <title>호두파파 스토어</title>
+        <link rel="icon" href="/favicon.png" />
+      </Head>
+      <ThemeProvider theme={theme}>
+        <Global styles={global} />
+        <QueryClientProvider client={queryClient}>
+          <Hydrate state={pageProps.dehydratedState}>
+            <Header />
+            <Component {...pageProps} />
+          </Hydrate>
+        </QueryClientProvider>
+      </ThemeProvider>
+    </>
   );
 };
 
