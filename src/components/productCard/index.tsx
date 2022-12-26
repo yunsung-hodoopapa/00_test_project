@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import { useCartStore } from 'src/store/useCartStore';
 import useCart from 'src/hooks/useCart';
-import FlexBox from 'src/components/common/FlexBox';
+import FlexBox from 'src/components/Common/FlexBox';
 import Image from 'next/image';
 import { ProductInfoType } from 'src/type';
 

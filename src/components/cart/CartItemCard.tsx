@@ -4,8 +4,8 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import Image from 'next/image';
 import { useCartStore } from 'src/store/useCartStore';
-import FlexBox from 'src/components/common/FlexBox';
-import Button from 'src/components/common/Button';
+import FlexBox from 'src/components/Common/FlexBox';
+import Button from 'src/components/Common/Button';
 import { CartItemType } from 'src/type';
 
 type CartCardType = {

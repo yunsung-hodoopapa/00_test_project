@@ -4,8 +4,8 @@ import styled from '@emotion/styled';
 import { useCartStore } from 'src/store/useCartStore';
 import { useModalStore } from 'src/store/useModalStore';
 import useCart from 'src/hooks/useCart';
-import Button from 'src/components/common/Button';
-import FlexBox from 'src/components/common/FlexBox';
+import Button from 'src/components/Common/Button';
+import FlexBox from 'src/components/Common/FlexBox';
 import { ProductInfoType, CouponType } from 'src/type/index';
 
 const Container = styled.div`

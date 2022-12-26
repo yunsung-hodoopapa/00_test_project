@@ -3,7 +3,7 @@ import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { useCartStore } from 'src/store/useCartStore';
 import { couponApi } from 'src/api/couponApi';
 import { useCoupons } from 'src/hooks/useCoupons';
-import FlexBox from 'src/components/common/FlexBox';
+import FlexBox from 'src/components/Common/FlexBox';
 import CouponCard from './CouponCard';
 
 const ListContainer = styled.div`
