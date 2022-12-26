@@ -4,15 +4,15 @@ import { useCartStore } from 'src/store/useCartStore';
 import useCart from 'src/hooks/useCart';
 import Image from 'next/image';
 import * as Styled from './ProductCard.style';
-import { ProductInfoType } from 'src/type';
+import { ProductInfoType } from 'src/types';
 
-type CardType = {
-  item: ProductInfoType;
+type ProductItemProps = {
+  product: ProductInfoType;
 };
 
-const ProductCard = (props: CardType) => {
+const ProductCard = (props: ProductItemProps) => {
   const {
-    item: { item_no, item_name, detail_image_url, price },
+    product: { item_no, item_name, detail_image_url, price },
   } = props;
 
   const { addCartItem, removeCartItem } = useCartStore();
@@ -22,11 +22,11 @@ const ProductCard = (props: CardType) => {
 
   const onClickToggleCart = useCallback(() => {
     if (!isStored) {
-      addCartItem(props.item);
+      addCartItem(props.product);
     } else {
       removeCartItem(item_no);
     }
-  }, [addCartItem, isStored, item_no, props.item, removeCartItem]);
+  }, [addCartItem, isStored, item_no, props.product, removeCartItem]);
 
   return (
     <Styled.Card>
