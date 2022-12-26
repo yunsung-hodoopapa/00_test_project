@@ -1,51 +1,52 @@
-import React, { Dispatch, SetStateAction } from 'react';
-import Button from 'src/components/common/Button';
+/* eslint-disable no-empty-pattern */
+import Link from 'next/link';
+import { VscChevronLeft, VscChevronRight } from 'react-icons/vsc';
+
+import { useProductsQueryWithRouter } from 'src/hooks/useProductQueryWithRouter';
+import { usePagenation } from 'src/hooks/usePagination';
+
 import * as Styled from './Pagination.style';
 
-type PaginationPropType = {
-  currentPage: number;
-  setCurrentPage: Dispatch<SetStateAction<number>>;
-  hasMore: boolean | undefined;
-  totalPages: number | undefined;
-};
+type PaginationProps = {};
 
-const Pagination = (props: PaginationPropType) => {
-  const { currentPage, setCurrentPage, hasMore, totalPages } = props;
+const Pagination = ({}: PaginationProps) => {
+  const { data } = useProductsQueryWithRouter();
+  const {
+    currentPage,
+    currentSize,
+    pages,
+    disabledNext,
+    disabledPrev,
+    onClickNext,
+    onClickPrev,
+  } = usePagenation(data?.totalCount);
 
   return (
     <Styled.Container>
-      <Button
-        isBorder={true}
-        themeId={'grey'}
-        marginRight={'0px'}
-        size={'MEDIUM'}
-        disabled={currentPage === 1}
-        onClick={() => setCurrentPage((prev) => prev - 1)}
-      >
-        이전 페이지
-      </Button>
-      {new Array(totalPages).fill('').map((num, i) => (
-        <Button
-          themeId={'grey'}
-          marginRight={'0px'}
-          size={'MEDIUM'}
-          key={i}
-          onClick={() => setCurrentPage(i + 1)}
-          isActive={Boolean(currentPage === i + 1)}
-        >
-          {i + 1}
-        </Button>
-      ))}
-      <Button
-        isBorder={true}
-        themeId={'grey'}
-        marginRight={'0px'}
-        size={'MEDIUM'}
-        disabled={!hasMore}
-        onClick={() => setCurrentPage((prev) => prev + 1)}
-      >
-        다음페이지
-      </Button>
+      <Styled.Button disabled={disabledPrev} onClick={onClickPrev}>
+        <VscChevronLeft />
+      </Styled.Button>
+      <Styled.PageWrapper>
+        {pages.map((page) => (
+          // 링크 컴포넌트를 활용하면 페이지네이션 다이나믹 라우팅이 한층 수월해질 수 있다.
+          <Link
+            key={page}
+            href={{
+              pathname: '/products',
+              query: {
+                page,
+                size: currentSize,
+              },
+            }}
+            passHref
+          >
+            <Styled.Page selected={page === currentPage}>{page}</Styled.Page>
+          </Link>
+        ))}
+      </Styled.PageWrapper>
+      <Styled.Button disabled={disabledNext} onClick={onClickNext}>
+        <VscChevronRight />
+      </Styled.Button>
     </Styled.Container>
   );
 };
