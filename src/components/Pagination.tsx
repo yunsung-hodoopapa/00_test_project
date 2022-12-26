@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 import styled from '@emotion/styled';
-import Button from 'src/components/Common/Button';
+import Button from 'src/components/common/Button';
 
 type PaginationPropType = {
   currentPage: number;

@@ -12,7 +12,7 @@ import type { AppProps } from 'next/app';
 
 import setupMSW from 'src/mocks/setup';
 
-import { Header } from 'src/components/Header';
+import { Header } from 'src/components/header';
 import Head from 'next/head';
 
 setupMSW();

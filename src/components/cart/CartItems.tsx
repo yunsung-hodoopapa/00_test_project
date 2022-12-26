@@ -3,8 +3,8 @@ import React, { useState, ChangeEvent, useEffect } from 'react';
 import { css } from '@emotion/react';
 import useCart from 'src/hooks/useCart';
 import { useCartStore } from 'src/store/useCartStore';
-import FlexBox from 'src/components/Common/FlexBox';
-import Button from 'src/components/Common/Button';
+import FlexBox from 'src/components/common/FlexBox';
+import Button from 'src/components/common/Button';
 import CartItemCard from './CartItemCard';
 
 const CartItems = () => {
