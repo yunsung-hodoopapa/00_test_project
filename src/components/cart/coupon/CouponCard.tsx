@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import Button from 'src/components/common/Button';
 import { useCartStore } from 'src/store/useCartStore';
 import { useModalStore } from 'src/store/useModalStore';
-import { CouponType } from 'src/type/index';
+import { CouponType } from 'src/types/index';
 
 type PropType = {
   coupon: CouponType;

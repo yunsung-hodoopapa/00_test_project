@@ -7,7 +7,7 @@ import {
   CouponType,
   RateCouponType,
   AmountCouponType,
-} from 'src/type/index';
+} from 'src/types/index';
 
 type CartStateType = {
   cart: ProductInfoType[];

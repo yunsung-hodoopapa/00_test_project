@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useCartStore } from 'src/store/useCartStore';
 import FlexBox from 'src/components/common/FlexBox';
 import Button from 'src/components/common/Button';
-import { CartItemType } from 'src/type';
+import { CartItemType } from 'src/types';
 
 type CartCardType = {
   cartItem: CartItemType;

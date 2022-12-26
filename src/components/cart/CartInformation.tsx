@@ -6,7 +6,7 @@ import { useModalStore } from 'src/store/useModalStore';
 import useCart from 'src/hooks/useCart';
 import Button from 'src/components/common/Button';
 import FlexBox from 'src/components/common/FlexBox';
-import { ProductInfoType, CouponType } from 'src/type/index';
+import { ProductInfoType, CouponType } from 'src/types/index';
 
 const Container = styled.div`
   display: flex;
