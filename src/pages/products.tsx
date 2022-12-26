@@ -1,28 +1,26 @@
 import type { NextPage } from 'next';
-import { dehydrate, QueryClient } from '@tanstack/react-query';
-import { productApi } from 'src/api/productApi';
-import ProductList from 'src/components/productList';
-import Layouts from 'src/components/layouts/Layouts';
+import { ProductList } from 'src/components/productList';
+import { useProductsQueryWithRouter } from 'src/hooks/useProductQueryWithRouter';
+import { Pagination } from 'src/components/pagination';
 
-const Home: NextPage = () => (
-  <Layouts>
-    <ProductList />
-  </Layouts>
-);
+import styled from '@emotion/styled';
 
-export async function getStaticProps() {
-  const queryClient = new QueryClient();
+const ProductsPage: NextPage = () => {
+  const { data, isFetched, isError } = useProductsQueryWithRouter();
 
-  // TODO: 컴포넌트에서 사용하는 react-query의 cache key와 서버사이드에서 사용하는 cache key가 같은 상수를 참조하도록 구성되면 좋을 것 같음. 
-  await queryClient.prefetchQuery(['products', 1], () =>
-    productApi.getProducts(1),
+  return (
+    <Container>
+      <ProductList products={data.products} />
+      <Pagination />
+    </Container>
   );
+};
 
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-}
+export default ProductsPage;
 
-export default Home;
+const Container = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px 20px 40px;
+`;
